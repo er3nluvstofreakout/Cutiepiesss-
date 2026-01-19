@@ -1,8 +1,230 @@
-/index.html        → HOME (icons / widgets)
-/letters.html      → Letters room (1-hour delay)
-/diary.html        → Private diary
-/meters.html       → Love / Mood / Kalesh meters
-/games.html        → Multiplayer games
-/paranormal.html   → Investigator office
-/adult.html        → Locked adult mood room
-/gallery.html      → Snaps & memories
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CutiePie 💖</title>
+
+<style>
+:root{
+  --pink:#ff6fae;
+  --soft:#fff1f6;
+  --dark:#1a1026;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont;
+  background:linear-gradient(180deg,#ffe6f2,#fff);
+  color:#333;
+  overflow-x:hidden;
+}
+
+/* ===== HEADER ===== */
+header{
+  text-align:center;
+  padding:24px 12px 10px;
+}
+header h1{
+  margin:0;
+  font-size:2.2rem;
+  color:var(--pink);
+}
+header p{
+  margin:6px 0 0;
+  opacity:.7;
+  font-size:.9rem;
+}
+
+/* ===== FLOATING PETS ===== */
+#pets{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+.pet{
+  position:absolute;
+  font-size:26px;
+  animation:floatPet linear infinite;
+  opacity:.9;
+}
+@keyframes floatPet{
+  from{transform:translateY(110vh)}
+  to{transform:translateY(-10vh)}
+}
+
+/* ===== SECTIONS ===== */
+.section-title{
+  padding:14px 16px 4px;
+  font-weight:600;
+  opacity:.8;
+}
+
+/* ===== HORIZONTAL ROW ===== */
+.row{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  padding:10px 16px 20px;
+  scroll-snap-type:x mandatory;
+}
+.row::-webkit-scrollbar{display:none}
+
+/* ===== CARD ===== */
+.card{
+  min-width:150px;
+  height:150px;
+  border-radius:22px;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  scroll-snap-align:start;
+  text-decoration:none;
+  color:inherit;
+  position:relative;
+  z-index:1;
+}
+.card span{
+  font-size:28px;
+}
+.card h3{
+  margin:0;
+  font-size:.95rem;
+}
+.card p{
+  margin:0;
+  font-size:.7rem;
+  opacity:.6;
+}
+
+/* ===== DARK CARDS ===== */
+.card.dark{
+  background:linear-gradient(160deg,#1a1026,#2b1842);
+  color:#f2eaff;
+}
+
+/* ===== LOCKED ===== */
+.card.locked{
+  opacity:.55;
+}
+.card.locked::after{
+  content:"🔒";
+  position:absolute;
+  top:10px;
+  right:12px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:18px;
+  font-size:.75rem;
+  opacity:.6;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>CutiePie 💖</h1>
+  <p>our private little universe</p>
+</header>
+
+<div id="pets"></div>
+
+<!-- 💌 FEELINGS -->
+<div class="section-title">Feelings</div>
+<div class="row">
+  <a class="card" href="letters.html">
+    <span>💌</span>
+    <h3>Letters</h3>
+    <p>delayed love</p>
+  </a>
+
+  <a class="card" href="diary.html">
+    <span>📓</span>
+    <h3>Diary</h3>
+    <p>private thoughts</p>
+  </a>
+
+  <a class="card" href="meters.html">
+    <span>❤️</span>
+    <h3>Meters</h3>
+    <p>mood · love · kalesh</p>
+  </a>
+</div>
+
+<!-- 📸 MEMORIES -->
+<div class="section-title">Memories</div>
+<div class="row">
+  <a class="card" href="gallery.html">
+    <span>📸</span>
+    <h3>Snaps</h3>
+    <p>our moments</p>
+  </a>
+
+  <a class="card" href="spotify.html">
+    <span>🎵</span>
+    <h3>Songs</h3>
+    <p>what we feel</p>
+  </a>
+</div>
+
+<!-- 🎮 FUN -->
+<div class="section-title">Fun</div>
+<div class="row">
+  <a class="card" href="games.html">
+    <span>🎮</span>
+    <h3>Games</h3>
+    <p>play together</p>
+  </a>
+
+  <div class="card locked">
+    <span>🎁</span>
+    <h3>Surprise</h3>
+    <p>opens later</p>
+  </div>
+</div>
+
+<!-- 🌑 SECRET -->
+<div class="section-title">Secret</div>
+<div class="row">
+  <a class="card dark" href="paranormal.html">
+    <span>👻</span>
+    <h3>Paranormal</h3>
+    <p>investigation room</p>
+  </a>
+
+  <a class="card dark locked" href="adult.html">
+    <span>🔥</span>
+    <h3>Adult</h3>
+    <p>private vibes</p>
+  </a>
+</div>
+
+<footer>🌙 just us</footer>
+
+<script>
+/* FLOATING PETS */
+const pets = ["🐶","🐱","🐰","🦊","🐼","🐻","🐥","🐯"];
+for(let i=0;i<18;i++){
+  const p=document.createElement("div");
+  p.className="pet";
+  p.textContent=pets[Math.floor(Math.random()*pets.length)];
+  p.style.left=Math.random()*100+"%";
+  p.style.animationDuration=15+Math.random()*20+"s";
+  p.style.fontSize=22+Math.random()*10+"px";
+  document.getElementById("pets").appendChild(p);
+}
+</script>
+
+</body>
+  </html>
