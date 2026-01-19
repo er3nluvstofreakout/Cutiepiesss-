@@ -1,186 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-
 <style>
-/* ===== RESET ===== */
-*{box-sizing:border-box;margin:0;padding:0}
+/* ===== General Styles ===== */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap');
 
-/* ===== BODY & BACKGROUND ===== */
-body{
-  font-family:'Poppins',sans-serif;
-  min-height:100vh;
-  color:#fff;
+body {
+  margin:0; padding:0;
+  font-family:'Roboto', sans-serif;
   overflow-x:hidden;
-  background:linear-gradient(-45deg,#ffe0ec,#fff5fa,#ffd6e8,#ffffff);
-  background-size:400% 400%;
-  animation:bgMove 18s ease infinite;
+  background:linear-gradient(135deg,#ffe6f2,#fff0f5);
 }
 
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-/* Soft floating particles */
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 30%,rgba(255,182,193,.25),transparent 40%),
-    radial-gradient(circle at 80% 70%,rgba(255,105,180,.25),transparent 40%);
-  animation:floatAura 12s ease-in-out infinite alternate;
-  pointer-events:none;
-}
-
-@keyframes floatAura{
-  from{transform:translateY(0)}
-  to{transform:translateY(-30px)}
-}
-
-/* ===== HEADER ===== */
-header{
+h1 {
+  font-family:'Pacifico', cursive;
   text-align:center;
-  padding:60px 20px 40px;
+  color:#ff69b4;
+  margin:20px 0;
+  font-size:2.5em;
 }
 
-header h1{
-  font-family:'Playfair Display',serif;
-  font-size:2.6rem;
-  background:linear-gradient(90deg,#ff7eb3,#ffd1e8);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:titlePulse 6s ease-in-out infinite;
+#container {
+  display:flex;
+  height:100vh;
 }
 
-@keyframes titlePulse{
-  0%,100%{text-shadow:0 0 15px rgba(255,105,180,.4)}
-  50%{text-shadow:0 0 25px rgba(255,105,180,.8)}
+/* ===== Sidebar ===== */
+#sidebar {
+  width:80px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(15px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px 0;
+  box-shadow:2px 0 10px rgba(0,0,0,0.1);
 }
 
-header p{
-  margin-top:10px;
-  font-size:.9rem;
-  opacity:.8;
-}
-
-/* ===== GRID ===== */
-.main-grid{
-  max-width:1100px;
-  margin:0 auto;
-  padding:20px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
-}
-
-/* ===== CARD ===== */
-.card{
-  position:relative;
-  padding:25px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,0.35);
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
-  transition:.4s ease;
+.sidebar-icon {
+  width:50px;
+  height:50px;
+  margin:15px 0;
+  border-radius:12px;
+  background: rgba(255,255,255,0.3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:24px;
   cursor:pointer;
+  transition: transform 0.3s, background 0.3s;
 }
 
-.card:hover{
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
+.sidebar-icon:hover {
+  transform: scale(1.2);
+  background: rgba(255,255,255,0.6);
 }
 
-/* ===== ICON ===== */
-.card .icon{
-  font-size:30px;
-  margin-bottom:15px;
-  opacity:.9;
+/* ===== Main Content ===== */
+#mainContent {
+  flex:1;
+  position:relative;
+  padding:30px;
+  overflow-y:auto;
 }
 
-/* ===== TEXT ===== */
-.card h2{
-  font-family:'Playfair Display',serif;
-  font-size:1.3rem;
-  margin-bottom:6px;
+.section-card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:25px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  min-height:200px;
+  display:none;
 }
 
-.card span{
-  font-size:.8rem;
-  opacity:.8;
+/* ===== Floating Background ===== */
+#bgContainer {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+  overflow:hidden;
 }
 
-/* ===== LOCKED ===== */
-.locked{
-  filter:blur(0.4px);
-}
-.locked::after{
-  content:'LOCKED';
+.floating-heart {
   position:absolute;
-  top:15px;
-  right:15px;
-  font-size:.7rem;
-  letter-spacing:2px;
-  opacity:.7;
+  font-size:20px;
+  opacity:0.7;
+  animation: floatHeart 10s linear infinite;
 }
+
+@keyframes floatHeart {
+  0% {transform: translateY(100vh) translateX(0) rotate(0deg);}
+  50% {transform: translateY(50vh) translateX(30vw) rotate(180deg);}
+  100% {transform: translateY(-10vh) translateX(60vw) rotate(360deg);}
+}
+
 </style>
 </head>
-
 <body>
 
-<header>
-  <h1>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</h1>
-  <p>A private world only we exist in</p>
-</header>
+<h1>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</h1>
 
-<section class="main-grid">
-
-  <div class="card">
-    <div class="icon">📖</div>
-    <h2>Private Diary</h2>
-    <span>Thoughts only we can read</span>
+<div id="container">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="sidebar-icon" onclick="showSection('diarySec')">📔</div>
+    <div class="sidebar-icon" onclick="showSection('lettersSec')">💌</div>
+    <div class="sidebar-icon" onclick="showSection('moodSec')">😊</div>
+    <div class="sidebar-icon" onclick="showSection('gamesSec')">🎮</div>
+    <div class="sidebar-icon" onclick="showSection('paranormalSec')">👻</div>
+    <div class="sidebar-icon" onclick="showSection('adultSec')">🔥</div>
   </div>
 
-  <div class="card">
-    <div class="icon">✉️</div>
-    <h2>Letters</h2>
-    <span>Time-locked messages</span>
+  <!-- Main Content -->
+  <div id="mainContent">
+    <div id="diarySec" class="section-card" contenteditable="true">Your private diary...</div>
+    <div id="lettersSec" class="section-card" contenteditable="true">Write letters...</div>
+    <div id="moodSec" class="section-card" contenteditable="true">Track your mood...</div>
+    <div id="gamesSec" class="section-card">
+      <p>Mini-games will appear here...</p>
+    </div>
+    <div id="paranormalSec" class="section-card" contenteditable="true">
+      Paranormal research notes...
+    </div>
+    <div id="adultSec" class="section-card" contenteditable="true">
+      Adult private room vibes...
+    </div>
   </div>
+</div>
 
-  <div class="card">
-    <div class="icon">💗</div>
-    <h2>Mood Zone</h2>
-    <span>Today’s emotional state</span>
-  </div>
+<!-- Floating Background Hearts -->
+<div id="bgContainer"></div>
 
-  <div class="card">
-    <div class="icon">🎮</div>
-    <h2>Games Room</h2>
-    <span>Play together</span>
-  </div>
+<script type="module">
+// ===== Firebase Setup =====
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
 
-  <div class="card">
-    <div class="icon">🕯️</div>
-    <h2>Paranormal Lab</h2>
-    <span>Unexplained & secrets</span>
-  </div>
+const firebaseConfig = {
+  apiKey: "AIzaSyBMfKs9XDoaEXOTZ80JabeFhwMQAFnsvq8",
+  authDomain: "cutiepiesss.firebaseapp.com",
+  projectId: "cutiepiesss",
+  storageBucket: "cutiepiesss.firebasestorage.app",
+  messagingSenderId: "109966976138",
+  appId: "1:109966976138:web:770f6454a3ae0df6777973"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-  <div class="card locked">
-    <div class="icon">🔥</div>
-    <h2>Adult Room</h2>
-    <span>Private & intimate</span>
-  </div>
+// ===== Sections Realtime Sync =====
+const sections = ['diarySec','lettersSec','moodSec','paranormalSec','adultSec'];
+sections.forEach(id=>{
+  const el=document.getElementById(id);
+  const dbRef=ref(db,'dreamRoom/'+id);
+  onValue(dbRef,snapshot=>{ if(snapshot.exists()){ el.innerHTML=snapshot.val(); } });
+  el.addEventListener('input',()=>{ set(dbRef,el.innerHTML); });
+});
 
-</section>
+// ===== Show Section =====
+function showSection(id){
+  sections.forEach(s=>document.getElementById(s).style.display='none');
+  document.getElementById(id).style.display='block';
+}
+
+// ===== Floating Hearts =====
+const bg = document.getElementById('bgContainer');
+for(let i=0;i<60;i++){
+  const heart = document.createElement('div');
+  heart.className='floating-heart';
+  heart.style.left=Math.random()*100+'vw';
+  heart.style.top=Math.random()*100+'vh';
+  heart.style.fontSize=(15+Math.random()*25)+'px';
+  heart.innerText='💖';
+  heart.style.opacity=Math.random()*0.6+0.4;
+  heart.style.animationDuration=(8+Math.random()*5)+'s';
+  bg.appendChild(heart);
+}
+
+</script>
 
 </body>
-    </html>
+      </html>
