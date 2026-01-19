@@ -4,205 +4,214 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</title>
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* Reset & Body */
-* {margin:0; padding:0; box-sizing:border-box;}
-body {
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(#2c001e, #000000);
-  color: #fff;
-  overflow-x: hidden;
-  min-height: 100vh;
-  position: relative;
-}
+  /* ===== General Body ===== */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    background: #1b0b1c;
+    overflow-x: hidden;
+    perspective: 1200px;
+  }
 
-/* Animated Background Particles */
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 182, 193, 0.6);
-  pointer-events: none;
-  animation: float 15s linear infinite;
-}
-@keyframes float {
-  0% { transform: translateY(100vh) translateX(0) scale(0.5); opacity:0.3;}
-  50% { opacity:0.6;}
-  100% { transform: translateY(-10vh) translateX(50vw) scale(1); opacity:0;}
-}
+  /* ===== Animated Background ===== */
+  #background {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    overflow: hidden;
+    background: linear-gradient(45deg,#2b0a2b,#4a0b4a,#7a0c7a);
+  }
+  .particle, .heart {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(100vh);
+    animation-fill-mode: forwards;
+  }
+  .particle {
+    background: rgba(255,192,203,0.15);
+  }
+  .heart {
+    width: 15px; height: 15px;
+    background: rgba(255,105,180,0.6);
+    clip-path: polygon(50% 0%, 61% 12%, 75% 12%, 88% 25%, 88% 37%, 75% 50%, 50% 75%, 25% 50%, 12% 37%, 12% 25%, 25% 12%, 39% 12%);
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.3); opacity:0; }
+    20% { opacity:0.5; }
+    50% { transform: translateY(50vh) scale(0.8); opacity:0.7; }
+    100% { transform: translateY(-10vh) scale(1); opacity:0; }
+  }
 
-/* Header */
-header {
-  text-align: center;
-  padding: 30px 20px 10px;
-}
-header h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 3em;
-  color: #ff7eb9;
-  text-shadow: 0 0 15px rgba(255,255,255,0.5);
-}
-header p {
-  font-size: 1.2em;
-  color: #ffc0cbaa;
-  margin-top: 5px;
-}
+  /* ===== Header ===== */
+  header {
+    text-align: center;
+    padding: 40px 20px 20px 20px;
+    font-family: 'Pacifico', cursive;
+    text-shadow: 0 0 15px rgba(255,182,193,0.5);
+  }
+  header h1 {
+    font-size: 3em;
+    color: #ffb6c1;
+    margin: 0;
+  }
+  header p {
+    font-size: 1.2em;
+    color: #fff0f5;
+    opacity: 0.8;
+  }
 
-/* Section Container */
-section {
-  margin: 30px 0;
-  padding-left: 20px;
-}
-section h2 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-  color: #ffb6c1;
-  text-shadow: 0 0 8px rgba(255,182,193,0.5);
-}
+  /* ===== Sections Row ===== */
+  .section-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px;
+    gap: 25px;
+    transform-style: preserve-3d;
+  }
 
-/* Scrollable Cards */
-.cards {
-  display: flex;
-  overflow-x: auto;
-  gap: 15px;
-  padding-bottom: 10px;
-  scroll-behavior: smooth;
-}
-.cards::-webkit-scrollbar { display: none; }
+  /* ===== Card Style ===== */
+  .card {
+    min-width: 180px;
+    flex: 0 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    cursor: pointer;
+    perspective: 800px;
+  }
+  .card:hover {
+    transform: translateY(-15px) rotateY(10deg);
+    box-shadow: 0 20px 40px rgba(255,182,193,0.5);
+  }
+  .card h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.3em;
+    margin: 15px 0 5px 0;
+  }
+  .card p {
+    font-size: 0.9em;
+    opacity: 0.85;
+  }
 
-/* Card Style */
-.card {
-  min-width: 160px;
-  min-height: 180px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-align: center;
-  font-size: 0.9em;
-  box-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
-  position: relative;
-}
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 25px rgba(255, 182, 193, 0.6);
-}
+  /* ===== Scrollbar Style ===== */
+  .section-row::-webkit-scrollbar { height: 8px; }
+  .section-row::-webkit-scrollbar-thumb {
+    background: rgba(255,182,193,0.6);
+    border-radius: 10px;
+  }
 
-/* Card Icon */
-.card img {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 10px;
-}
-
-/* Card Title */
-.card h3 {
-  font-weight: 600;
-  font-size: 1.1em;
-  margin-bottom: 5px;
-}
-
-/* Card Subtitle */
-.card p {
-  font-weight: 400;
-  font-size: 0.85em;
-  color: #ffb6c1aa;
-}
-
-/* Floating Animation for Cards */
-.card {
-  animation: floatCard 6s ease-in-out infinite alternate;
-}
-@keyframes floatCard {
-  0% { transform: translateY(0px);}
-  100% { transform: translateY(-8px);}
-}
 </style>
 </head>
 <body>
 
-<!-- Animated Particles -->
-<script>
-for(let i=0; i<50; i++){
-  let p = document.createElement('div');
-  p.className = 'particle';
-  p.style.width = p.style.height = (Math.random()*15+5) + 'px';
-  p.style.left = Math.random()*100 + 'vw';
-  p.style.animationDuration = (Math.random()*10+5)+'s';
-  document.body.appendChild(p);
-}
-</script>
+<div id="background"></div>
 
-<!-- Header -->
 <header>
   <h1>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</h1>
-  <p>our private little universe</p>
+  <p>our private moody universe</p>
 </header>
 
-<!-- Feelings Section -->
+<!-- ===== Sections ===== -->
 <section>
-  <h2>Feelings</h2>
-  <div class="cards">
+  <h2 style="margin-left:20px;">💌 Feelings</h2>
+  <div class="section-row">
     <div class="card">
-      <img src="https://img.icons8.com/fluency/48/ffffff/letter.png"/>
-      <h3>Letters</h3>
-      <p>delayed love</p>
+      <h2>Delayed Love</h2>
+      <p>Letters</p>
     </div>
     <div class="card">
-      <img src="https://img.icons8.com/fluency/48/ffffff/notebook.png"/>
-      <h3>Diary</h3>
-      <p>private thoughts</p>
-    </div>
-    <div class="card">
-      <img src="https://img.icons8.com/fluency/48/ffffff/mood.png"/>
-      <h3>Mood Tracker</h3>
-      <p>what we feel</p>
+      <h2>Secret Thoughts</h2>
+      <p>Private Diary</p>
     </div>
   </div>
 </section>
 
-<!-- Memories Section -->
 <section>
-  <h2>Memories</h2>
-  <div class="cards">
+  <h2 style="margin-left:20px;">📸 Memories</h2>
+  <div class="section-row">
     <div class="card">
-      <img src="https://img.icons8.com/fluency/48/ffffff/camera.png"/>
-      <h3>Snaps</h3>
-      <p>our moments</p>
+      <h2>Our Moments</h2>
+      <p>Snaps</p>
     </div>
     <div class="card">
-      <img src="https://img.icons8.com/fluency/48/ffffff/musical-notes.png"/>
-      <h3>Songs</h3>
-      <p>what we feel</p>
+      <h2>Melodies of Us</h2>
+      <p>Songs</p>
+    </div>
+    <div class="card">
+      <h2>Our Tunes</h2>
+      <p>Spotify</p>
     </div>
   </div>
 </section>
 
-<!-- Fun Section -->
 <section>
-  <h2>Fun</h2>
-  <div class="cards">
+  <h2 style="margin-left:20px;">🎮 Fun</h2>
+  <div class="section-row">
     <div class="card">
-      <img src="https://img.icons8.com/fluency/48/ffffff/controller.png"/>
-      <h3>Games</h3>
-      <p>play together</p>
+      <h2>Play Together</h2>
+      <p>Games</p>
     </div>
     <div class="card">
-      <img src="https://img.icons8.com/fluency/48/ffffff/gift.png"/>
-      <h3>Surprise</h3>
-      <p>opens later</p>
+      <h2>Mystery Box</h2>
+      <p>Locked</p>
     </div>
   </div>
 </section>
+
+<section>
+  <h2 style="margin-left:20px;">🕵️‍♂️ Secret Zones</h2>
+  <div class="section-row">
+    <div class="card">
+      <h2>Paranormal Zone</h2>
+      <p>Investigator Room</p>
+    </div>
+    <div class="card">
+      <h2>Moonlight Room</h2>
+      <p>18+ Adult Room</p>
+    </div>
+    <div class="card">
+      <h2>Hidden Areas</h2>
+      <p>Secret</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ===== Floating Particles =====
+  const background = document.getElementById('background');
+  for(let i=0;i<40;i++){
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    let size=Math.random()*12+5;
+    p.style.width = p.style.height = size + 'px';
+    p.style.left = Math.random()*100+'vw';
+    p.style.animationDuration = Math.random()*15+10+'s';
+    background.appendChild(p);
+  }
+  // ===== Floating Hearts =====
+  for(let i=0;i<25;i++){
+    const h = document.createElement('div');
+    h.classList.add('heart');
+    h.style.left = Math.random()*100+'vw';
+    h.style.animationDuration = Math.random()*10+5+'s';
+    h.style.animationDelay = Math.random()*5+'s';
+    background.appendChild(h);
+  }
+</script>
 
 </body>
-        </html>
+  </html>
