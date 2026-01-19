@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paranormal Investigation Department</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#1a0d12,#050406);
+  font-family:'Montserrat',sans-serif;
+  color:#e6e6e6;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url('https://images.unsplash.com/photo-1508612761958-e93145c01d7c') center/cover;
+  opacity:.08;
+  filter:blur(2px);
+  z-index:-2;
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.8),rgba(0,0,0,.95));
+  z-index:-1;
+}
+.torch{
+  position:fixed;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle,rgba(255,255,255,.15),transparent 60%);
+  pointer-events:none;
+  mix-blend-mode:screen;
+  filter:blur(8px);
+}
+header{
+  padding:30px 20px 10px;
+  text-align:center;
+}
+header h1{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:2rem;
+  margin:0;
+}
+header a{
+  color:#ff9ecb;
+  text-decoration:none;
+  font-size:.8rem;
+}
+.department{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+  padding:20px;
+  max-width:1100px;
+  margin:auto;
+}
+.panel{
+  background:rgba(30,18,22,.75);
+  border-radius:18px;
+  padding:18px;
+  backdrop-filter:blur(10px);
+}
+.panel h2{
+  font-size:1rem;
+  opacity:.85;
+}
+textarea,input{
+  width:100%;
+  background:rgba(0,0,0,.4);
+  border:none;
+  border-radius:10px;
+  padding:10px;
+  color:white;
+}
+.logs{font-size:.85rem;opacity:.8}
+.meter{
+  height:8px;
+  border-radius:8px;
+  background:linear-gradient(90deg,#400000,#aa0000);
+}
+footer{
+  text-align:center;
+  font-size:.75rem;
+  opacity:.5;
+  padding:20px;
+}
+</style>
+</head>
+
+<body>
+<div class="torch" id="torch"></div>
+
+<header>
+  <h1>Paranormal Investigation Department</h1>
+  <p><a href="index.html">← Back to Dreams Of Paradise</a></p>
+</header>
+
+<section class="department">
+  <div class="panel">
+    <h2>Case Notes</h2>
+    <textarea rows="6"></textarea>
+  </div>
+  <div class="panel">
+    <h2>Evidence Board</h2>
+    <input type="file">
+  </div>
+  <div class="panel">
+    <h2>Activity Log</h2>
+    <div class="logs">
+      • 02:14 AM – unexplained sound<br>
+      • 03:02 AM – temperature drop
+    </div>
+  </div>
+  <div class="panel">
+    <h2>Signal Monitor</h2>
+    <div class="meter"></div>
+  </div>
+</section>
+
+<footer>Private Department • Dreams Of Paradise</footer>
+
+<script>
+const torch=document.getElementById('torch');
+document.addEventListener('mousemove',e=>{
+  torch.style.left=e.clientX-250+'px';
+  torch.style.top=e.clientY-250+'px';
+});
+</script>
+</body>
+</html>
