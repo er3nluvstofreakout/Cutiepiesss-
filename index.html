@@ -2,214 +2,171 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dreams Of Paradise~</title>  <!-- Google Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">  <style>
-    :root {
-      --bg-dark: #140016;
-      --bg-mid: #2a0030;
-      --card-bg: rgba(255,255,255,0.08);
-      --card-border: rgba(255,255,255,0.12);
-      --accent-pink: #ff9acb;
-      --accent-purple: #c77dff;
-      --text-soft: #f5e9f0;
-      --text-dim: #cdbfd0;
+  <title>Dreams Of Paradise~</title>  <!-- Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">  <style>
+    :root{
+      --glass: rgba(255,255,255,0.12);
+      --blur: blur(18px);
+      --radius: 22px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *{box-sizing:border-box;margin:0;padding:0}
 
-    body {
-      min-height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      color: var(--text-soft);
-      background: radial-gradient(circle at top, #3b0045, var(--bg-dark));
-      overflow-x: hidden;
+    body{
+      min-height:100vh;
+      font-family:'Poppins',sans-serif;
+      background: radial-gradient(circle at top, #2a001f, #0b0010 70%);
+      color:#fff;
+      overflow-x:hidden;
     }
 
     /* Smokey animated background */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: -50%;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,154,203,0.12), transparent 40%),
-        radial-gradient(circle at 70% 60%, rgba(199,125,255,0.12), transparent 45%),
-        radial-gradient(circle at 50% 80%, rgba(255,255,255,0.05), transparent 50%);
-      animation: smokeMove 18s linear infinite;
-      z-index: -1;
-      filter: blur(40px);
+    body::before, body::after{
+      content:"";
+      position:fixed;
+      inset:-20%;
+      background:radial-gradient(circle, rgba(255,0,120,.15), transparent 60%);
+      animation: smoke 30s linear infinite;
+      z-index:-1;
+    }
+    body::after{
+      animation-duration:45s;
+      opacity:.6;
     }
 
-    @keyframes smokeMove {
-      0% { transform: translate(0,0) rotate(0deg); }
-      50% { transform: translate(5%, -5%) rotate(180deg); }
-      100% { transform: translate(0,0) rotate(360deg); }
+    @keyframes smoke{
+      0%{transform:translate(0,0) scale(1)}
+      50%{transform:translate(-10%,10%) scale(1.2)}
+      100%{transform:translate(0,0) scale(1)}
     }
 
-    .container {
-      max-width: 420px;
-      margin: 0 auto;
-      padding: 20px 16px 40px;
+    header{
+      display:flex;
+      justify-content:center;
+      padding:32px 16px 18px;
     }
 
-    /* Header */
-    .header {
-      text-align: center;
-      margin-bottom: 28px;
+    .title-frame{
+      padding:18px 26px;
+      border-radius:28px;
+      background:rgba(0,0,0,.35);
+      backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,.15);
+      text-align:center;
     }
 
-    .title-frame {
-      display: inline-block;
-      padding: 14px 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(8px);
+    .title-frame h1{
+      font-family:'Playfair Display',serif;
+      font-size:30px;
+      color:#ff9ad5;
     }
 
-    .title {
-      font-family: 'Playfair Display', serif;
-      font-size: 30px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: var(--accent-pink);
+    .title-frame p{
+      font-size:13px;
+      opacity:.8;
+      margin-top:6px;
+      font-style:italic;
     }
 
-    .subtitle {
-      margin-top: 8px;
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 14px;
-      color: var(--text-dim);
+    .section{
+      padding:18px 18px 6px;
     }
 
-    /* Section heading */
-    .section {
-      margin-top: 26px;
+    .section h2{
+      font-size:18px;
+      font-weight:500;
+      margin-bottom:14px;
+      opacity:.9;
+      display:flex;
+      align-items:center;
+      gap:8px;
     }
 
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 500;
-      font-size: 18px;
-      margin-bottom: 14px;
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
     }
 
-    .section-title svg {
-      width: 22px;
-      height: 22px;
-      fill: var(--accent-pink);
-      opacity: 0.9;
+    .card{
+      min-height:120px;
+      padding:16px;
+      border-radius:var(--radius);
+      backdrop-filter:var(--blur);
+      border:1px solid rgba(255,255,255,.15);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      transition:.3s ease;
     }
 
-    /* Grid */
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 40px rgba(0,0,0,.45);
     }
 
-    .card {
-      position: relative;
-      padding: 18px 14px 20px;
-      border-radius: 18px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s ease, background 0.3s ease;
-      min-height: 110px;
+    .card h3{
+      font-family:'Playfair Display',serif;
+      font-size:18px;
+      margin-bottom:6px;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      background: rgba(255,255,255,0.12);
+    .card span{
+      font-size:13px;
+      opacity:.75;
     }
 
-    .card-icon {
-      width: 26px;
-      height: 26px;
-      margin-bottom: 10px;
-      fill: var(--accent-purple);
-      opacity: 0.85;
-    }
+    /* Unique section vibes */
+    .letters{background:linear-gradient(135deg,rgba(255,120,170,.25),rgba(120,0,80,.25))}
+    .diary{background:linear-gradient(135deg,rgba(180,140,255,.25),rgba(50,0,90,.25))}
 
-    .card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
+    .snaps{background:linear-gradient(135deg,rgba(255,220,120,.25),rgba(120,80,0,.25))}
+    .songs{background:linear-gradient(135deg,rgba(120,255,180,.25),rgba(0,80,40,.25))}
 
-    .card p {
-      font-size: 13px;
-      color: var(--text-dim);
-    }
+    .spotify{background:linear-gradient(135deg,rgba(30,215,96,.25),rgba(10,70,40,.25))}
+    .meters{background:linear-gradient(135deg,rgba(255,80,80,.25),rgba(90,0,0,.25))}
 
-    /* Unique subtle accents per card */
-    .letters { box-shadow: inset 0 0 0 1px rgba(255,154,203,0.15); }
-    .diary { box-shadow: inset 0 0 0 1px rgba(199,125,255,0.15); }
-    .snaps { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); }
-    .songs { box-shadow: inset 0 0 0 1px rgba(255,154,203,0.12); }
+    .paranormal{background:linear-gradient(135deg,rgba(180,180,180,.2),rgba(30,30,30,.35))}
+    .adult{background:linear-gradient(135deg,rgba(120,0,0,.35),rgba(20,0,0,.45))}
 
-    /* Divider bar like screenshot */
-    .divider {
-      height: 4px;
-      margin: 26px 0 10px;
-      border-radius: 4px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-    }
+    .games{background:linear-gradient(135deg,rgba(120,160,255,.25),rgba(20,40,90,.25))}
+    .locked{background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(0,0,0,.35))}
+
+    footer{height:40px}
   </style></head>
-<body>
-  <div class="container"><!-- Header -->
-<div class="header">
+<body><header>
   <div class="title-frame">
-    <div class="title">𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</div>
+    <h1>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</h1>
+    <p>our private moody universe</p>
   </div>
-  <div class="subtitle">our private moody universe</div>
-</div>
-
-<!-- Feelings -->
-<div class="section">
-  <div class="section-title">
-    <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.35-10-8.5C-0.5 8 2.5 4 6.5 5c2 .5 3.5 2.5 3.5 2.5S11.5 5.5 13.5 5c4-1 7 3 4.5 7.5C19.5 16.65 12 21 12 21z"/></svg>
-    Feelings
-  </div>
+</header><section class="section">
+  <h2>Feelings</h2>
   <div class="grid">
-    <div class="card letters">
-      <svg class="card-icon" viewBox="0 0 24 24"><path d="M2 4h20v16H2zM4 6l8 5 8-5"/></svg>
-      <h3>Delayed Love</h3>
-      <p>Letters</p>
-    </div>
-    <div class="card diary">
-      <svg class="card-icon" viewBox="0 0 24 24"><path d="M6 2h12v20H6z"/></svg>
-      <h3>Secret Thoughts</h3>
-      <p>Private Diary</p>
-    </div>
+    <div class="card letters"><h3>Delayed Love</h3><span>Letters (1h delivery)</span></div>
+    <div class="card diary"><h3>Secret Thoughts</h3><span>Private Diary</span></div>
   </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- Memories -->
-<div class="section">
-  <div class="section-title">
-    <svg viewBox="0 0 24 24"><path d="M12 5a3 3 0 100 6 3 3 0 000-6zm-7 14h14l-2-6H7l-2 6z"/></svg>
-    Memories
-  </div>
+</section><section class="section">
+  <h2>Memories</h2>
   <div class="grid">
-    <div class="card snaps">
-      <svg class="card-icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>
-      <h3>Our Moments</h3>
-      <p>Snaps</p>
-    </div>
-    <div class="card songs">
-      <svg class="card-icon" viewBox="0 0 24 24"><path d="M12 3v14a3 3 0 11-2-2.83V5h8V3z"/></svg>
-      <h3>Melodies</h3>
-      <p>Songs</p>
-    </div>
+    <div class="card snaps"><h3>Our Moments</h3><span>Snaps</span></div>
+    <div class="card songs"><h3>Melodies</h3><span>Songs</span></div>
   </div>
-</div>
-
+</section><section class="section">
+  <h2>Music & Mood</h2>
+  <div class="grid">
+    <div class="card spotify"><h3>Spotify Room</h3><span>Shared playlists</span></div>
+    <div class="card meters"><h3>Mood Meters</h3><span>Kalesh · Love · Energy</span></div>
   </div>
-</body>
-        </html>
+</section><section class="section">
+  <h2>Secrets</h2>
+  <div class="grid">
+    <div class="card paranormal"><h3>Paranormal Files</h3><span>Investigator logs</span></div>
+    <div class="card adult"><h3>Adult Room (18+)</h3><span>Locked & intimate</span></div>
+  </div>
+</section><section class="section">
+  <h2>Fun</h2>
+  <div class="grid">
+    <div class="card games"><h3>Mini Games</h3><span>Play together</span></div>
+    <div class="card locked"><h3>Locked Surprises</h3><span>Unlock later</span></div>
+  </div>
+</section><footer></footer></body>
+</html>
