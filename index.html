@@ -2,131 +2,135 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CutiePie 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --pink:#ff6fae;
-  --soft:#fff1f6;
-  --dark:#1a1026;
+/* ===== RESET ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ===== BODY & BACKGROUND ===== */
+body{
+  font-family:'Poppins',sans-serif;
+  min-height:100vh;
+  color:#fff;
+  overflow-x:hidden;
+  background:linear-gradient(-45deg,#ffe0ec,#fff5fa,#ffd6e8,#ffffff);
+  background-size:400% 400%;
+  animation:bgMove 18s ease infinite;
 }
 
-*{box-sizing:border-box}
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont;
-  background:linear-gradient(180deg,#ffe6f2,#fff);
-  color:#333;
-  overflow-x:hidden;
+/* Soft floating particles */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(255,182,193,.25),transparent 40%),
+    radial-gradient(circle at 80% 70%,rgba(255,105,180,.25),transparent 40%);
+  animation:floatAura 12s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+
+@keyframes floatAura{
+  from{transform:translateY(0)}
+  to{transform:translateY(-30px)}
 }
 
 /* ===== HEADER ===== */
 header{
   text-align:center;
-  padding:24px 12px 10px;
+  padding:60px 20px 40px;
 }
+
 header h1{
-  margin:0;
-  font-size:2.2rem;
-  color:var(--pink);
+  font-family:'Playfair Display',serif;
+  font-size:2.6rem;
+  background:linear-gradient(90deg,#ff7eb3,#ffd1e8);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:titlePulse 6s ease-in-out infinite;
 }
+
+@keyframes titlePulse{
+  0%,100%{text-shadow:0 0 15px rgba(255,105,180,.4)}
+  50%{text-shadow:0 0 25px rgba(255,105,180,.8)}
+}
+
 header p{
-  margin:6px 0 0;
-  opacity:.7;
+  margin-top:10px;
   font-size:.9rem;
-}
-
-/* ===== FLOATING PETS ===== */
-#pets{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-}
-.pet{
-  position:absolute;
-  font-size:26px;
-  animation:floatPet linear infinite;
-  opacity:.9;
-}
-@keyframes floatPet{
-  from{transform:translateY(110vh)}
-  to{transform:translateY(-10vh)}
-}
-
-/* ===== SECTIONS ===== */
-.section-title{
-  padding:14px 16px 4px;
-  font-weight:600;
   opacity:.8;
 }
 
-/* ===== HORIZONTAL ROW ===== */
-.row{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  padding:10px 16px 20px;
-  scroll-snap-type:x mandatory;
+/* ===== GRID ===== */
+.main-grid{
+  max-width:1100px;
+  margin:0 auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
 }
-.row::-webkit-scrollbar{display:none}
 
 /* ===== CARD ===== */
 .card{
-  min-width:150px;
-  height:150px;
-  border-radius:22px;
-  background:rgba(255,255,255,.92);
-  box-shadow:0 10px 25px rgba(0,0,0,.12);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  scroll-snap-align:start;
-  text-decoration:none;
-  color:inherit;
   position:relative;
-  z-index:1;
-}
-.card span{
-  font-size:28px;
-}
-.card h3{
-  margin:0;
-  font-size:.95rem;
-}
-.card p{
-  margin:0;
-  font-size:.7rem;
-  opacity:.6;
+  padding:25px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,0.35);
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  transition:.4s ease;
+  cursor:pointer;
 }
 
-/* ===== DARK CARDS ===== */
-.card.dark{
-  background:linear-gradient(160deg,#1a1026,#2b1842);
-  color:#f2eaff;
+.card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+/* ===== ICON ===== */
+.card .icon{
+  font-size:30px;
+  margin-bottom:15px;
+  opacity:.9;
+}
+
+/* ===== TEXT ===== */
+.card h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;
+  margin-bottom:6px;
+}
+
+.card span{
+  font-size:.8rem;
+  opacity:.8;
 }
 
 /* ===== LOCKED ===== */
-.card.locked{
-  opacity:.55;
+.locked{
+  filter:blur(0.4px);
 }
-.card.locked::after{
-  content:"🔒";
+.locked::after{
+  content:'LOCKED';
   position:absolute;
-  top:10px;
-  right:12px;
-}
-
-/* ===== FOOTER ===== */
-footer{
-  text-align:center;
-  padding:18px;
-  font-size:.75rem;
-  opacity:.6;
+  top:15px;
+  right:15px;
+  font-size:.7rem;
+  letter-spacing:2px;
+  opacity:.7;
 }
 </style>
 </head>
@@ -134,97 +138,49 @@ footer{
 <body>
 
 <header>
-  <h1>CutiePie 💖</h1>
-  <p>our private little universe</p>
+  <h1>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</h1>
+  <p>A private world only we exist in</p>
 </header>
 
-<div id="pets"></div>
+<section class="main-grid">
 
-<!-- 💌 FEELINGS -->
-<div class="section-title">Feelings</div>
-<div class="row">
-  <a class="card" href="letters.html">
-    <span>💌</span>
-    <h3>Letters</h3>
-    <p>delayed love</p>
-  </a>
+  <div class="card">
+    <div class="icon">📖</div>
+    <h2>Private Diary</h2>
+    <span>Thoughts only we can read</span>
+  </div>
 
-  <a class="card" href="diary.html">
-    <span>📓</span>
-    <h3>Diary</h3>
-    <p>private thoughts</p>
-  </a>
+  <div class="card">
+    <div class="icon">✉️</div>
+    <h2>Letters</h2>
+    <span>Time-locked messages</span>
+  </div>
 
-  <a class="card" href="meters.html">
-    <span>❤️</span>
-    <h3>Meters</h3>
-    <p>mood · love · kalesh</p>
-  </a>
-</div>
+  <div class="card">
+    <div class="icon">💗</div>
+    <h2>Mood Zone</h2>
+    <span>Today’s emotional state</span>
+  </div>
 
-<!-- 📸 MEMORIES -->
-<div class="section-title">Memories</div>
-<div class="row">
-  <a class="card" href="gallery.html">
-    <span>📸</span>
-    <h3>Snaps</h3>
-    <p>our moments</p>
-  </a>
+  <div class="card">
+    <div class="icon">🎮</div>
+    <h2>Games Room</h2>
+    <span>Play together</span>
+  </div>
 
-  <a class="card" href="spotify.html">
-    <span>🎵</span>
-    <h3>Songs</h3>
-    <p>what we feel</p>
-  </a>
-</div>
-
-<!-- 🎮 FUN -->
-<div class="section-title">Fun</div>
-<div class="row">
-  <a class="card" href="games.html">
-    <span>🎮</span>
-    <h3>Games</h3>
-    <p>play together</p>
-  </a>
+  <div class="card">
+    <div class="icon">🕯️</div>
+    <h2>Paranormal Lab</h2>
+    <span>Unexplained & secrets</span>
+  </div>
 
   <div class="card locked">
-    <span>🎁</span>
-    <h3>Surprise</h3>
-    <p>opens later</p>
+    <div class="icon">🔥</div>
+    <h2>Adult Room</h2>
+    <span>Private & intimate</span>
   </div>
-</div>
 
-<!-- 🌑 SECRET -->
-<div class="section-title">Secret</div>
-<div class="row">
-  <a class="card dark" href="paranormal.html">
-    <span>👻</span>
-    <h3>Paranormal</h3>
-    <p>investigation room</p>
-  </a>
-
-  <a class="card dark locked" href="adult.html">
-    <span>🔥</span>
-    <h3>Adult</h3>
-    <p>private vibes</p>
-  </a>
-</div>
-
-<footer>🌙 just us</footer>
-
-<script>
-/* FLOATING PETS */
-const pets = ["🐶","🐱","🐰","🦊","🐼","🐻","🐥","🐯"];
-for(let i=0;i<18;i++){
-  const p=document.createElement("div");
-  p.className="pet";
-  p.textContent=pets[Math.floor(Math.random()*pets.length)];
-  p.style.left=Math.random()*100+"%";
-  p.style.animationDuration=15+Math.random()*20+"s";
-  p.style.fontSize=22+Math.random()*10+"px";
-  document.getElementById("pets").appendChild(p);
-}
-</script>
+</section>
 
 </body>
-  </html>
+    </html>
