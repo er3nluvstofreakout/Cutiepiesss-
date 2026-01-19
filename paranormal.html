@@ -8,251 +8,211 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 
 <style>
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:'Montserrat',sans-serif;
-    color:#e6e6e6;
-    min-height:100vh;
-    background:radial-gradient(circle at top,#1a0d12,#050406);
-    overflow-x:hidden;
-  }
+*{box-sizing:border-box;}
+body {
+  margin: 0;
+  font-family:'Montserrat', sans-serif;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1a0d12, #050406);
+  color: #e6e6e6;
+  overflow-x: hidden;
+  position: relative;
+}
+/* Smokey background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1508612761958-e93145c01d7c') center/cover no-repeat;
+  opacity: 0.08;
+  filter: blur(2px);
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.8), rgba(0,0,0,.95));
+  z-index: -1;
+}
 
-  /* Smokey background */
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:url('https://images.unsplash.com/photo-1508612761958-e93145c01d7c') center/cover no-repeat;
-    opacity:0.08;
-    filter:blur(2px);
-    z-index:-2;
-  }
-  body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:linear-gradient(180deg, rgba(0,0,0,.8), rgba(0,0,0,.95));
-    z-index:-1;
-  }
+/* Torch flashlight effect */
+.torch {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: blur(8px);
+}
 
-  .torch{
-    position:fixed;
-    width:500px;
-    height:500px;
-    background:radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
-    pointer-events:none;
-    mix-blend-mode: screen;
-    filter: blur(8px);
-  }
-
-  header{
-    padding:30px 20px 10px;
-    text-align:center;
-  }
-  header h1{
-    font-family:'Playfair Display', serif;
-    font-style:italic;
-    letter-spacing:1px;
-    font-size:2rem;
-    margin:0;
-  }
-  header p{
-    font-size:.9rem;
-    opacity:.7;
-  }
-
-  .dashboard{
-    max-width:1100px;
-    margin:20px auto;
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:18px;
-    padding:0 20px;
-  }
-
-  .main-board, .side-panel{
-    background: rgba(30,18,22,0.75);
-    border-radius:18px;
-    padding:18px;
-    backdrop-filter:blur(10px);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
-    min-height:400px;
-    overflow-y:auto;
-  }
-
-  .main-board{
-    position:relative;
-  }
-
-  .note{
-    position:absolute;
-    width:140px;
-    min-height:100px;
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.15);
-    border-radius:12px;
-    padding:10px;
-    cursor:move;
-  }
-  .note textarea{
-    width:100%;
-    height:70px;
-    border:none;
-    background:transparent;
-    color:#fff;
-    resize:none;
-    font-family:inherit;
-  }
-  .note img{
-    max-width:100%;
-    margin-top:6px;
-    border-radius:6px;
-  }
-
-  h2{
-    margin-top:0;
-    font-family:'Playfair Display',serif;
-    font-size:1.1rem;
-    opacity:.85;
-  }
-
-  input[type="file"]{
-    display:block;
-    margin-top:6px;
-    width:100%;
-  }
-
-  .activity-log{
-    font-size:.85rem;
-    max-height:200px;
-    overflow-y:auto;
-    opacity:.8;
-    margin-top:6px;
-    padding:6px;
-    background:rgba(0,0,0,0.2);
-    border-radius:10px;
-  }
-
-  .meter{
-    height:8px;
-    border-radius:8px;
-    background:linear-gradient(90deg,#400000,#aa0000);
-    margin-top:6px;
-    transition:width 0.5s ease;
-  }
-
-  button{
-    margin-top:6px;
-    background:#2b151c;
-    border:none;
-    color:#fff;
-    padding:6px 10px;
-    border-radius:10px;
-    cursor:pointer;
-    opacity:.85;
-  }
-  button:hover{opacity:1;}
+/* Dashboard layout */
+.dashboard {
+  max-width: 1000px;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  padding: 0 18px;
+}
+.panel {
+  background: rgba(30, 18, 22, 0.75);
+  border-radius: 18px;
+  padding: 18px;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+  position: relative;
+}
+.panel h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  opacity: .85;
+}
+textarea, input {
+  width: 100%;
+  background: rgba(0,0,0,.4);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: #fff;
+  font-family: inherit;
+  resize: none;
+}
+button {
+  margin-top: 8px;
+  background: #2b151c;
+  border: none;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: .85;
+}
+button:hover { opacity: 1; }
+.notes img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.logs {
+  font-size: .85rem;
+  max-height: 160px;
+  overflow-y: auto;
+  opacity: .8;
+}
+.meter-container {
+  background: rgba(0,0,0,.3);
+  height: 12px;
+  border-radius: 10px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+.meter {
+  height: 12px;
+  width: 0%;
+  background: linear-gradient(90deg,#400000,#aa0000);
+  border-radius: 10px;
+  transition: width 0.2s ease;
+}
+.disturb-alert {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #aa0000;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+footer {
+  text-align: center;
+  font-size: .75rem;
+  opacity: .5;
+  padding: 20px 0 30px;
+  grid-column: 1 / -1;
+}
 </style>
 </head>
+
 <body>
 <div class="torch" id="torch"></div>
 
-<header>
-  <h1>Paranormal Investigation Dept.</h1>
-  <p>Confidential • Internal Use Only</p>
-</header>
-
 <div class="dashboard">
-
-  <!-- MAIN BOARD -->
-  <div class="main-board" id="mainBoard">
-    <!-- Notes will appear here -->
+  <div class="panel">
+    <h2>Case Notes</h2>
+    <textarea rows="6" placeholder="Observations, sightings, strange events..."></textarea>
+    <button>Save Note</button>
   </div>
 
-  <!-- SIDE PANEL -->
-  <div class="side-panel">
-    <h2>Add Note</h2>
-    <textarea id="noteText" placeholder="Observation, finding..."></textarea>
-    <input type="file" id="noteImage" accept="image/*"/>
-    <button id="addNoteBtn">Add Note</button>
+  <div class="panel notes">
+    <h2>Evidence Board</h2>
+    <input type="file" accept="image/*" multiple/>
+    <p style="font-size:.8rem;opacity:.6">Attach images, screenshots, EMF photos</p>
+  </div>
 
+  <div class="panel">
     <h2>Activity Log</h2>
-    <div class="activity-log" id="activityLog">
+    <div class="logs" id="activityLog">
       • 02:14 AM – unexplained sound detected<br>
       • 03:02 AM – temperature drop<br>
+      • 03:47 AM – movement near doorway
     </div>
-
-    <h2>Signal Meter</h2>
-    <div class="meter" id="signalMeter" style="width:20%"></div>
   </div>
 
+  <div class="panel">
+    <h2>Signal Monitor</h2>
+    <p style="font-size:.8rem;opacity:.7">Ambient disturbance</p>
+    <div class="meter-container">
+      <div class="meter" id="meter"></div>
+    </div>
+    <div class="disturb-alert" id="alert">DISTURBANCE!</div>
+  </div>
 </div>
 
+<footer>
+  Private Department • Dreams Of Paradise
+</footer>
+
 <script>
-  // Torch effect
-  const torch = document.getElementById('torch');
-  document.addEventListener('mousemove', e=>{
-    torch.style.left = e.clientX - 250 +'px';
-    torch.style.top = e.clientY - 250 +'px';
-  });
+const torch = document.getElementById('torch');
+document.addEventListener('mousemove', e => {
+  torch.style.left = e.clientX - 250 + 'px';
+  torch.style.top = e.clientY - 250 + 'px';
+});
 
-  // Notes system
-  const addNoteBtn = document.getElementById('addNoteBtn');
-  const mainBoard = document.getElementById('mainBoard');
-  const noteText = document.getElementById('noteText');
-  const noteImage = document.getElementById('noteImage');
-  const activityLog = document.getElementById('activityLog');
-  const signalMeter = document.getElementById('signalMeter');
+// REALISTIC PARANORMAL METER
+const meter = document.getElementById('meter');
+const alertBox = document.getElementById('alert');
+const activityLog = document.getElementById('activityLog');
 
-  function createNote(text, imgSrc){
-    const note = document.createElement('div');
-    note.className = 'note';
-    note.style.top = Math.random()*250+'px';
-    note.style.left = Math.random()*200+'px';
-    note.innerHTML = `<textarea>${text}</textarea>`;
-    if(imgSrc){
-      const img = document.createElement('img');
-      img.src = imgSrc;
-      note.appendChild(img);
-    }
-    mainBoard.appendChild(note);
+let currentLevel = 0;
+let targetLevel = 0;
 
-    // Dragging
-    let offsetX, offsetY, isDown=false;
-    note.addEventListener('mousedown', e=>{
-      isDown=true;
-      offsetX = e.offsetX;
-      offsetY = e.offsetY;
-      note.style.zIndex=1000;
-    });
-    document.addEventListener('mousemove', e=>{
-      if(isDown){
-        note.style.left = (e.clientX-offsetX)+'px';
-        note.style.top = (e.clientY-offsetY)+'px';
-      }
-    });
-    document.addEventListener('mouseup', ()=>{isDown=false; note.style.zIndex=1;});
+function addLog(text){
+  const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  activityLog.innerHTML = `• ${time} – ${text}<br>` + activityLog.innerHTML;
+}
+
+function updateMeter(){
+  if(Math.random() < 0.02){
+    targetLevel = 50 + Math.random() * 50; // spike
+    addLog('Unexplained disturbance detected');
+    alertBox.style.opacity = 1;
+    setTimeout(()=>{ alertBox.style.opacity = 0; }, 1200);
+  } else {
+    targetLevel = Math.random() * 30; // background hum
   }
 
-  addNoteBtn.addEventListener('click', ()=>{
-    const text = noteText.value.trim();
-    const file = noteImage.files[0];
-    if(!text && !file) return;
-    if(file){
-      const reader = new FileReader();
-      reader.onload = function(e){
-        createNote(text, e.target.result);
-      }
-      reader.readAsDataURL(file);
-    } else {
-      createNote(text,null);
-    }
+  currentLevel += (targetLevel - currentLevel) * 0.05;
+  meter.style.width = currentLevel + '%';
+}
 
-    activityLog.innerHTML += `<br>• ${new Date().toLocaleTimeString()} – note added`;
-    signalMeter.style.width = Math.min(100, Math.random()*100)+'%';
-    noteText.value=''; noteImage.value='';
-  });
+setInterval(updateMeter, 200);
 
 </script>
 </body>
