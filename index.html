@@ -3,147 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dreams Of Paradise~</title>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<title>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</title>
 <style>
-  /* Reset & Base */
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body, html { width:100%; height:100%; font-family: 'Roboto', sans-serif; overflow-x:hidden; }
-
-  /* Background: Dark smoky romantic */
-  body {
-    background: linear-gradient(135deg, #2b0033, #4b0033);
-    color: #fff;
-    position: relative;
+  /* ===== General Styles ===== */
+  body{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI', sans-serif;
+    background:#0c0c0c;
+    overflow-x:hidden;
+    color:#fff;
   }
 
-  /* Smoke animation */
-  .smoke {
-    position: fixed;
-    top:0; left:0; width:100%; height:100%;
-    pointer-events:none;
-    background: url('https://i.ibb.co/d5qYK8H/smoke-particle.png') repeat;
-    animation: moveSmoke 200s linear infinite;
-    opacity:0.05;
-  }
-  @keyframes moveSmoke {
-    0% {background-position:0 0;}
-    100% {background-position:2000px 1000px;}
+  /* ===== Smokey animated background ===== */
+  #backgroundCanvas{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
   }
 
-  /* Header */
-  header {
+  /* ===== Header ===== */
+  header{
     text-align:center;
-    margin:30px 0;
-  }
-  header h1 {
-    font-family: 'Pacifico', cursive;
-    font-size:2.8rem;
-    color: #ffb6c1;
-    border: 2px solid #ffb6c1;
+    margin:20px auto;
+    font-size:2em;
+    letter-spacing:2px;
+    border:2px solid rgba(255,192,203,0.5);
     display:inline-block;
-    padding: 10px 25px;
-    border-radius: 15px;
-    background: rgba(255,255,255,0.05);
-  }
-  header p {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.2rem;
-    margin-top: 8px;
-    color:#ffccd5;
+    padding:10px 30px;
+    border-radius:15px;
+    color:#ffb6c1;
+    background:rgba(0,0,0,0.4);
   }
 
-  /* Section Titles */
-  .section-title {
-    font-size:1.5rem;
-    font-weight:700;
-    margin: 20px 20px 10px;
-    color:#ffe4e1;
+  /* ===== Grid for sections ===== */
+  #sectionsGrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+    max-width:1200px;
+    margin:40px auto;
+    padding:0 20px;
   }
 
-  /* Horizontal grid container */
-  .grid {
-    display:flex;
-    overflow-x:auto;
-    padding: 10px 20px;
-    gap: 15px;
-  }
-  .grid::-webkit-scrollbar { height:8px; }
-  .grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
-  
-  /* Section cards */
-  .card {
-    min-width:180px;
-    height:150px;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:10px;
+  .sectionCard{
     position:relative;
-    flex-shrink:0;
-    transition: transform 0.3s ease;
+    border-radius:15px;
+    padding:15px;
+    min-height:180px;
+    cursor:pointer;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    transition:all 0.3s ease;
+    overflow:hidden;
   }
-  .card:hover { transform: translateY(-10px); }
 
-  /* Card icons */
-  .card img {
-    width:50px;
-    height:50px;
+  .sectionCard:hover{
+    transform:translateY(-5px);
+    background:rgba(255,255,255,0.12);
+  }
+
+  .sectionIcon{
+    font-size:40px;
+    display:block;
     margin-bottom:10px;
-    object-fit:contain;
-    filter: brightness(1.2);
   }
 
-  /* Card text */
-  .card h3 { font-family:'Pacifico', cursive; font-size:1.1rem; margin-bottom:5px; color:#ffc0cb; }
-  .card p { font-size:0.9rem; color:#ffd6e0; text-align:center; }
+  .sectionTitle{
+    font-size:1.2em;
+    margin-bottom:5px;
+  }
 
-  /* Unique card themes (example) */
-  .card.adult { background: rgba(40,0,20,0.4); }
-  .card.paranormal { background: rgba(20,0,40,0.4); }
-  .card.snap { background: rgba(60,20,40,0.4); }
-  .card.spotify { background: rgba(30,30,30,0.4); }
+  .sectionSubtitle{
+    font-size:0.85em;
+    color:#ddd;
+  }
+
+  /* ===== Locked Section ===== */
+  .locked{
+    cursor:not-allowed;
+    opacity:0.5;
+  }
 </style>
 </head>
 <body>
-<div class="smoke"></div>
+<canvas id="backgroundCanvas"></canvas>
+<header>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</header>
 
-<header>
-  <h1>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</h1>
-  <p>our private moody universe</p>
-</header>
+<div id="sectionsGrid">
+  <!-- Private Diary -->
+  <div class="sectionCard" id="diarySec">
+    <span class="sectionIcon">📓</span>
+    <div class="sectionTitle">Private Diary</div>
+    <div class="sectionSubtitle">Your personal moody notes</div>
+  </div>
 
-<!-- Feelings Section -->
-<div class="section-title">💌 Feelings</div>
-<div class="grid">
-  <div class="card"><img src="https://i.ibb.co/hg6r3M2/letter.png" alt="Letters"><h3>Delayed Love</h3><p>Letters</p></div>
-  <div class="card"><img src="https://i.ibb.co/3y9L5Gd/diary.png" alt="Diary"><h3>Secret Thoughts</h3><p>Private Diary</p></div>
+  <!-- Snaps -->
+  <div class="sectionCard" id="snapsSec">
+    <span class="sectionIcon">📸</span>
+    <div class="sectionTitle">Snaps</div>
+    <div class="sectionSubtitle">Share memories with each other</div>
+  </div>
+
+  <!-- Spotify -->
+  <div class="sectionCard" id="spotifySec">
+    <span class="sectionIcon">🎵</span>
+    <div class="sectionTitle">Spotify</div>
+    <div class="sectionSubtitle">Play songs & albums</div>
+  </div>
+
+  <!-- Kalesh Meter -->
+  <div class="sectionCard" id="kaleshSec">
+    <span class="sectionIcon">⚡</span>
+    <div class="sectionTitle">Kalesh Meter</div>
+    <div class="sectionSubtitle">Track vibes & conflicts</div>
+  </div>
+
+  <!-- Mood Meter -->
+  <div class="sectionCard" id="moodSec">
+    <span class="sectionIcon">😊</span>
+    <div class="sectionTitle">Mood Meter</div>
+    <div class="sectionSubtitle">Check your emotional state</div>
+  </div>
+
+  <!-- Paranormal Investigator -->
+  <div class="sectionCard" id="paranormalSec">
+    <span class="sectionIcon">👻</span>
+    <div class="sectionTitle">Paranormal Investigator</div>
+    <div class="sectionSubtitle">Spooky research zone</div>
+  </div>
+
+  <!-- Adult Room -->
+  <div class="sectionCard" id="adultSec">
+    <span class="sectionIcon">🔥</span>
+    <div class="sectionTitle">Adult Room</div>
+    <div class="sectionSubtitle">18+ private vibes</div>
+  </div>
+
+  <!-- Letters -->
+  <div class="sectionCard" id="lettersSec">
+    <span class="sectionIcon">✉️</span>
+    <div class="sectionTitle">Letters</div>
+    <div class="sectionSubtitle">Send secret love notes</div>
+  </div>
+
+  <!-- Mini Games -->
+  <div class="sectionCard" id="gamesSec">
+    <span class="sectionIcon">🎮</span>
+    <div class="sectionTitle">Mini Games</div>
+    <div class="sectionSubtitle">Play together, realtime</div>
+  </div>
+
+  <!-- Locked Surprise -->
+  <div class="sectionCard locked" id="lockedSec">
+    <span class="sectionIcon">🔒</span>
+    <div class="sectionTitle">Locked Area</div>
+    <div class="sectionSubtitle">Mystery unlocks later</div>
+  </div>
 </div>
 
-<!-- Memories Section -->
-<div class="section-title">📸 Memories</div>
-<div class="grid">
-  <div class="card snap"><img src="https://i.ibb.co/7Q3Qw0F/snap.png" alt="Snaps"><h3>Our Moments</h3><p>Snaps</p></div>
-  <div class="card spotify"><img src="https://i.ibb.co/dJ6t0sP/music.png" alt="Songs"><h3>Melodies of Us</h3><p>Songs</p></div>
-</div>
+<!-- ===== Scripts ===== -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
 
-<!-- Fun Section -->
-<div class="section-title">🎮 Fun</div>
-<div class="grid">
-  <div class="card"><img src="https://i.ibb.co/vx7Ztqf/gamepad.png" alt="Games"><h3>Play Together</h3><p>Games</p></div>
-  <div class="card adult"><img src="https://i.ibb.co/RTyC6Lb/adult.png" alt="Adult Room"><h3>Forbidden Room</h3><p>18+ Adult Room</p></div>
-  <div class="card paranormal"><img src="https://i.ibb.co/3Nv2V2d/paranormal.png" alt="Paranormal"><h3>Paranormal Zone</h3><p>Mysterious Room</p></div>
-</div>
+// ===== Your Firebase config =====
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-<!-- Secret Section -->
-<div class="section-title">🔒 Secret</div>
-<div class="grid">
-  <div class="card"><img src="https://i.ibb.co/0VtRGVY/locked.png" alt="Locked"><h3>Hidden Treasures</h3><p>Locked Areas</p></div>
-</div>
+// ===== Realtime sync for editable sections =====
+const editableSections = ['diarySec','snapsSec','lettersSec','kaleshSec','moodSec','paranormalSec','adultSec'];
+editableSections.forEach(id=>{
+  const el = document.getElementById(id);
+  const dbRef = ref(db,'dreamsOfParadise/'+id);
+  onValue(dbRef,snap=>{ if(snap.exists()){ el.innerHTML = snap.val(); } });
+  el.addEventListener('input', ()=>{ set(dbRef, el.innerHTML); });
+});
 
+// ===== Section clicks =====
+editableSections.forEach(id=>{
+  document.getElementById(id).onclick = ()=>{
+    const el=document.getElementById(id);
+    el.contentEditable = true;
+    el.focus();
+  }
+});
+
+// ===== Smokey Background Animation =====
+const canvas=document.getElementById('backgroundCanvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+const particles=[];
+for(let i=0;i<120;i++){
+  particles.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    size: 1+Math.random()*3,
+    alpha:0.1+Math.random()*0.3,
+    speedX: -0.2+Math.random()*0.4,
+    speedY: -0.1+Math.random()*0.3
+  });
+}
+
+function animate(){
+  ctx.fillStyle='rgba(12,12,12,0.1)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,182,193,'+p.alpha+')';
+    ctx.fill();
+    p.x += p.speedX;
+    p.y += p.speedY;
+    if(p.x<0)p.x=canvas.width;
+    if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height;
+    if(p.y>canvas.height)p.y=0;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
 </body>
-</html>
+    </html>
