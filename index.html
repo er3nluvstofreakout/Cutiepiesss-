@@ -1,226 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CutiePie’s Room 💖</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CutiePie 🌙</title>
+
 <style>
-/* ===== General Styles ===== */
+/* ===== RESET ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ===== BODY ===== */
 body{
-  margin:0;padding:0;font-family:'Arial',sans-serif;
-  background:linear-gradient(135deg,#ffe6f2,#fff0f5);
-  color:#333;overflow-x:hidden;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:linear-gradient(180deg,#ffe6f2,#f7f0ff,#0e0b16);
+  color:#222;
+  overflow-x:hidden;
 }
-h1{font-size:2.5em;text-align:center;margin:20px 0;color:#ff69b4;}
-section{margin:20px auto;padding:15px;max-width:650px;border-radius:15px;background:rgba(255,255,255,0.85);box-shadow:0 5px 15px rgba(0,0,0,0.2);}
-section h2{cursor:pointer;margin-bottom:10px;}
-.collapsible{min-height:50px;padding:10px;border-radius:10px;background:#fff4f4;overflow:auto;}
-#floatContainer{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
-.float{position:absolute;font-size:25px;animation: floatAnim 12s ease-in-out infinite;}
-@keyframes floatAnim{0%{transform:translateY(100vh);}50%{transform:translateY(50vh);}100%{transform:translateY(0vh);}}
-.game-box{margin:10px 0;padding:15px;border-radius:10px;background:#fff0f5;text-align:center;}
-button{padding:5px 10px;margin:3px;border-radius:5px;border:none;cursor:pointer;}
-.locked{background:#ffd9ec;color:#999;text-align:center;padding:10px;border-radius:10px;cursor:not-allowed;}
-/* ===== Haunted ===== */
-#haunted{background:rgba(20,20,30,0.9);color:#eee;border:2px dashed #ff5555;box-shadow:0 0 20px #ff5555 inset;position:relative;overflow:hidden;}
-#haunted p{font-style:italic;}
-/* ===== Adult Room ===== */
-#adultRoom{background:linear-gradient(120deg,#440022,#220011);color:#ffccd5;padding:20px;border-radius:20px;box-shadow:0 0 30px #ff77aa inset;}
+
+/* ===== HEADER ===== */
+header{
+  padding:40px 20px;
+  text-align:center;
+}
+header h1{
+  font-size:2.6rem;
+  color:#ff6fae;
+}
+header p{
+  opacity:.7;
+}
+
+/* ===== FLOATING PETS ===== */
+#pets{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+.pet{
+  position:absolute;
+  font-size:28px;
+  animation:float 14s infinite ease-in-out;
+}
+@keyframes float{
+  0%{transform:translateY(100vh)}
+  100%{transform:translateY(-120vh)}
+}
+
+/* ===== SECTIONS ===== */
+section{
+  max-width:900px;
+  margin:30px auto;
+  background:rgba(255,255,255,.92);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  position:relative;
+  z-index:2;
+}
+section.dark{
+  background:rgba(15,12,25,.95);
+  color:#eee;
+}
+section h2{
+  font-size:1.4rem;
+  margin-bottom:10px;
+}
+.sub{
+  opacity:.7;
+  font-size:.9rem;
+  margin-bottom:10px;
+}
+
+/* ===== ROOMS ===== */
+.room{
+  background:rgba(255,255,255,.6);
+  padding:15px;
+  border-radius:15px;
+  min-height:90px;
+}
+.dark .room{
+  background:rgba(255,255,255,.05);
+}
+
+/* ===== METERS ===== */
+.meter{
+  height:10px;
+  background:#ddd;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:10px;
+}
+.meter span{
+  display:block;
+  height:100%;
+  width:40%;
+  background:linear-gradient(90deg,#ff6fae,#ffb3d9);
+}
+
+/* ===== LOCKED ===== */
+.locked{
+  filter:blur(1px);
+  opacity:.6;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:30px;
+  color:#aaa;
+}
 </style>
 </head>
+
 <body>
-<h1>CutiePie’s Room 💖</h1>
-<div id="floatContainer"></div>
 
-<!-- ===== Sections ===== -->
+<header>
+  <h1>CutiePie 🌙</h1>
+  <p>our private little universe</p>
+</header>
+
+<div id="pets"></div>
+
+<!-- 💌 LETTERS -->
 <section>
-<h2 onclick="toggleSection('notesSec')">📒 Daily Notes</h2>
-<div id="notesSec" class="collapsible" contenteditable="true"></div>
+  <h2>💌 Letters Room</h2>
+  <div class="sub">slow letters · delayed feelings</div>
+  <div class="room">Write letters here…</div>
 </section>
 
+<!-- 📓 DIARY -->
 <section>
-<h2 onclick="toggleSection('moodSec')">😊 Mood Tracker</h2>
-<div id="moodSec" class="collapsible" contenteditable="true"></div>
+  <h2>📓 Private Diary</h2>
+  <div class="sub">things we don’t say out loud</div>
+  <div class="room"></div>
 </section>
 
+<!-- ⚡ METERS -->
 <section>
-<h2 onclick="toggleSection('lettersSec')">💌 Letters</h2>
-<div id="lettersSec" class="collapsible" contenteditable="true"></div>
+  <h2>⚡ Relationship Meters</h2>
+  <div class="sub">mood · love · kalesh</div>
+
+  Love
+  <div class="meter"><span></span></div>
+
+  Mood
+  <div class="meter"><span style="width:60%"></span></div>
+
+  Kalesh
+  <div class="meter"><span style="width:20%"></span></div>
 </section>
 
+<!-- 📸 SNAP ROOM -->
 <section>
-<h2 onclick="toggleSection('kaleshSec')">⚡ Kalesh Meter</h2>
-<div id="kaleshSec" class="collapsible" contenteditable="true"></div>
+  <h2>📸 Snap Room</h2>
+  <div class="sub">private memories</div>
+  <div class="room"></div>
 </section>
 
+<!-- 👻 PARANORMAL -->
+<section class="dark">
+  <h2>👻 Paranormal Investigator Zone</h2>
+  <div class="sub">notes · sightings · theories</div>
+  <div class="room"></div>
+</section>
+
+<!-- 🔥 ADULT -->
+<section class="dark locked">
+  <h2>🔥 Private Night Room</h2>
+  <div class="sub">locked · intimate · moody</div>
+  <div class="room"></div>
+</section>
+
+<!-- 🎮 GAMES -->
 <section>
-<h2 onclick="toggleSection('albumSec')">📸 Album</h2>
-<div id="albumSec" class="collapsible" contenteditable="true"></div>
+  <h2>🎮 Mini Games</h2>
+  <div class="sub">play together</div>
+  <div class="room">
+    Tic Tac Toe · Dice · RPS · Memory · more soon
+  </div>
 </section>
 
-<section id="haunted">
-<h2 onclick="toggleSection('hauntedSec')">👻 Haunted Investigator</h2>
-<div id="hauntedSec" class="collapsible" contenteditable="true">Spooky research notes...</div>
-</section>
+<footer>
+  🌙 just us
+</footer>
 
-<section id="adultRoom">
-<h2 onclick="toggleSection('adultSec')">🔥 Adult Room (18+)</h2>
-<div id="adultSec" class="collapsible" contenteditable="true">Private vibes...</div>
-</section>
-
-<section>
-<h2 onclick="toggleSection('gamesSec')">🎮 Mini Games</h2>
-<div id="gamesSec" class="collapsible">
-
-<!-- Tic Tac Toe -->
-<div class="game-box">
-<h3>Tic Tac Toe</h3>
-<div id="ticTacToeBoard"></div>
-<button onclick="startTTT()">Start Game</button>
-</div>
-
-<!-- Dice Roll -->
-<div class="game-box">
-<h3>Dice Roll</h3>
-<p id="diceResult">Roll the dice!</p>
-<button onclick="rollDice()">Roll 🎲</button>
-</div>
-
-<!-- Memory Game -->
-<div class="game-box">
-<h3>Memory Game</h3>
-<p id="memoryResult">Flip cards and match pairs!</p>
-<button onclick="startMemory()">Start Memory</button>
-</div>
-
-<!-- Rock Paper Scissors -->
-<div class="game-box">
-<h3>Rock Paper Scissors</h3>
-<p id="rpsResult">Choose: Rock, Paper, or Scissors</p>
-<button onclick="playRPS('Rock')">Rock</button>
-<button onclick="playRPS('Paper')">Paper</button>
-<button onclick="playRPS('Scissors')">Scissors</button>
-</div>
-
-<!-- Placeholders for other games -->
-<div class="game-box locked">Ludo Placeholder</div>
-<div class="game-box locked">Carrom Placeholder</div>
-
-</div>
-</section>
-
-<section>
-<h2>🔒 Locked Surprise</h2>
-<div id="lockedSec" class="collapsible locked">Will unlock later 😏</div>
-</section>
-
-<footer>💖 CutiePie’s Room</footer>
-
-<!-- ===== Firebase & Scripts ===== -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
-
-// Firebase Config
-const firebaseConfig = {
-  apiKey: "AIzaSyBMfKs9XDoaEXOTZ80JabeFhwMQAFnsvq8",
-  authDomain: "cutiepiesss.firebaseapp.com",
-  projectId: "cutiepiesss",
-  storageBucket: "cutiepiesss.firebasestorage.app",
-  messagingSenderId: "109966976138",
-  appId: "1:109966976138:web:770f6454a3ae0df6777973"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// ===== Sections Realtime Sync =====
-const sections = ['notesSec','moodSec','lettersSec','kaleshSec','albumSec','hauntedSec','adultSec'];
-sections.forEach(id=>{
-  const el=document.getElementById(id);
-  const dbRef=ref(db,'cutieRoom/'+id);
-  onValue(dbRef,snapshot=>{ if(snapshot.exists()){ el.innerHTML=snapshot.val(); } });
-  el.addEventListener('input',()=>{ set(dbRef,el.innerHTML); });
-});
-
-// ===== Toggle Sections =====
-function toggleSection(id){
-  const sec=document.getElementById(id);
-  sec.style.display=(sec.style.display==='none'||sec.style.display==='')?'block':'none';
+<!-- ===== PET SCRIPT ===== -->
+<script>
+const pets = ["🐶","🐱","🐰","🦊","🐼","🐻"];
+for(let i=0;i<25;i++){
+  const p=document.createElement("div");
+  p.className="pet";
+  p.innerText=pets[Math.floor(Math.random()*pets.length)];
+  p.style.left=Math.random()*100+"%";
+  p.style.animationDuration=10+Math.random()*20+"s";
+  document.getElementById("pets").appendChild(p);
 }
-
-// ===== Floating Animations =====
-const floatContainer=document.getElementById('floatContainer');
-const emojis=['💖','🐱','🐶','💌','👻','🎈','💫','😻','🦴','🎁','💜','💛'];
-for(let i=0;i<80;i++){
-  const span=document.createElement('span');
-  span.className='float';
-  span.style.left=Math.random()*90+'%';
-  span.style.top=Math.random()*90+'%';
-  span.style.fontSize=(20+Math.random()*30)+'px';
-  span.innerText=emojis[Math.floor(Math.random()*emojis.length)];
-  floatContainer.appendChild(span);
-}
-
-// ===== Mini Games =====
-
-// Dice Roll
-function rollDice(){
-  const result=Math.floor(Math.random()*6)+1;
-  document.getElementById('diceResult').innerText='You rolled: '+result;
-}
-
-// Tic Tac Toe Multi-device
-const tttBoardRef = ref(db,'cutieRoom/tttBoard');
-function startTTT(){
-  const boardDiv=document.getElementById('ticTacToeBoard');
-  boardDiv.innerHTML='';
-  // Initialize board in Firebase if empty
-  onValue(tttBoardRef,snap=>{
-    let board = snap.val()||Array(9).fill('');
-    boardDiv.innerHTML='';
-    board.forEach((v,i)=>{
-      const btn=document.createElement('button');
-      btn.style.width='60px'; btn.style.height='60px'; btn.style.margin='2px';
-      btn.innerText=v;
-      btn.onclick=()=>{
-        if(btn.innerText===''){
-          btn.innerText='X';
-          board[i]='X';
-          set(tttBoardRef,board);
-        }
-      };
-      boardDiv.appendChild(btn);
-    });
-  });
-}
-
-// Memory Game Placeholder
-function startMemory(){ document.getElementById('memoryResult').innerText='Memory game started! Flip cards!'; }
-
-// Rock Paper Scissors Multi-device
-const rpsRef = ref(db,'cutieRoom/rps');
-function playRPS(choice){
-  const options=['Rock','Paper','Scissors'];
-  const comp = options[Math.floor(Math.random()*3)];
-  let result='';
-  if(choice===comp) result="Draw! Both chose "+choice;
-  else if((choice==='Rock'&&comp==='Scissors')||(choice==='Paper'&&comp==='Rock')||(choice==='Scissors'&&comp==='Paper'))
-    result="You Win! Computer chose "+comp;
-  else result="You Lose! Computer chose "+comp;
-  set(rpsRef,result);
-}
-onValue(rpsRef,snap=>{
-  if(snap.exists()){ document.getElementById('rpsResult').innerText=snap.val(); }
-});
-
-// Locked surprise timer
-setTimeout(()=>{
-  const locked=document.getElementById('lockedSec');
-  locked.classList.remove('locked');
-  locked.innerText='🎁 Surprise unlocked!';
-},1000*60*60); // 1 hour delay
-
 </script>
+
 </body>
-  </html>
+</html>
