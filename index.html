@@ -1,241 +1,215 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</title>
-<style>
-  /* ===== General Styles ===== */
-  body{
-    margin:0;
-    padding:0;
-    font-family:'Segoe UI', sans-serif;
-    background:#0c0c0c;
-    overflow-x:hidden;
-    color:#fff;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dreams Of Paradise~</title>  <!-- Google Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">  <style>
+    :root {
+      --bg-dark: #140016;
+      --bg-mid: #2a0030;
+      --card-bg: rgba(255,255,255,0.08);
+      --card-border: rgba(255,255,255,0.12);
+      --accent-pink: #ff9acb;
+      --accent-purple: #c77dff;
+      --text-soft: #f5e9f0;
+      --text-dim: #cdbfd0;
+    }
 
-  /* ===== Smokey animated background ===== */
-  #backgroundCanvas{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:-1;
-  }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ===== Header ===== */
-  header{
-    text-align:center;
-    margin:20px auto;
-    font-size:2em;
-    letter-spacing:2px;
-    border:2px solid rgba(255,192,203,0.5);
-    display:inline-block;
-    padding:10px 30px;
-    border-radius:15px;
-    color:#ffb6c1;
-    background:rgba(0,0,0,0.4);
-  }
+    body {
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-soft);
+      background: radial-gradient(circle at top, #3b0045, var(--bg-dark));
+      overflow-x: hidden;
+    }
 
-  /* ===== Grid for sections ===== */
-  #sectionsGrid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:20px;
-    max-width:1200px;
-    margin:40px auto;
-    padding:0 20px;
-  }
+    /* Smokey animated background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,154,203,0.12), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(199,125,255,0.12), transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(255,255,255,0.05), transparent 50%);
+      animation: smokeMove 18s linear infinite;
+      z-index: -1;
+      filter: blur(40px);
+    }
 
-  .sectionCard{
-    position:relative;
-    border-radius:15px;
-    padding:15px;
-    min-height:180px;
-    cursor:pointer;
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(10px);
-    transition:all 0.3s ease;
-    overflow:hidden;
-  }
+    @keyframes smokeMove {
+      0% { transform: translate(0,0) rotate(0deg); }
+      50% { transform: translate(5%, -5%) rotate(180deg); }
+      100% { transform: translate(0,0) rotate(360deg); }
+    }
 
-  .sectionCard:hover{
-    transform:translateY(-5px);
-    background:rgba(255,255,255,0.12);
-  }
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
 
-  .sectionIcon{
-    font-size:40px;
-    display:block;
-    margin-bottom:10px;
-  }
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
 
-  .sectionTitle{
-    font-size:1.2em;
-    margin-bottom:5px;
-  }
+    .title-frame {
+      display: inline-block;
+      padding: 14px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+    }
 
-  .sectionSubtitle{
-    font-size:0.85em;
-    color:#ddd;
-  }
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--accent-pink);
+    }
 
-  /* ===== Locked Section ===== */
-  .locked{
-    cursor:not-allowed;
-    opacity:0.5;
-  }
-</style>
-</head>
+    .subtitle {
+      margin-top: 8px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+
+    /* Section heading */
+    .section {
+      margin-top: 26px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .section-title svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--accent-pink);
+      opacity: 0.9;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .card {
+      position: relative;
+      padding: 18px 14px 20px;
+      border-radius: 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, background 0.3s ease;
+      min-height: 110px;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .card-icon {
+      width: 26px;
+      height: 26px;
+      margin-bottom: 10px;
+      fill: var(--accent-purple);
+      opacity: 0.85;
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    /* Unique subtle accents per card */
+    .letters { box-shadow: inset 0 0 0 1px rgba(255,154,203,0.15); }
+    .diary { box-shadow: inset 0 0 0 1px rgba(199,125,255,0.15); }
+    .snaps { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); }
+    .songs { box-shadow: inset 0 0 0 1px rgba(255,154,203,0.12); }
+
+    /* Divider bar like screenshot */
+    .divider {
+      height: 4px;
+      margin: 26px 0 10px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    }
+  </style></head>
 <body>
-<canvas id="backgroundCanvas"></canvas>
-<header>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</header>
-
-<div id="sectionsGrid">
-  <!-- Private Diary -->
-  <div class="sectionCard" id="diarySec">
-    <span class="sectionIcon">📓</span>
-    <div class="sectionTitle">Private Diary</div>
-    <div class="sectionSubtitle">Your personal moody notes</div>
+  <div class="container"><!-- Header -->
+<div class="header">
+  <div class="title-frame">
+    <div class="title">𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</div>
   </div>
+  <div class="subtitle">our private moody universe</div>
+</div>
 
-  <!-- Snaps -->
-  <div class="sectionCard" id="snapsSec">
-    <span class="sectionIcon">📸</span>
-    <div class="sectionTitle">Snaps</div>
-    <div class="sectionSubtitle">Share memories with each other</div>
+<!-- Feelings -->
+<div class="section">
+  <div class="section-title">
+    <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.35-10-8.5C-0.5 8 2.5 4 6.5 5c2 .5 3.5 2.5 3.5 2.5S11.5 5.5 13.5 5c4-1 7 3 4.5 7.5C19.5 16.65 12 21 12 21z"/></svg>
+    Feelings
   </div>
-
-  <!-- Spotify -->
-  <div class="sectionCard" id="spotifySec">
-    <span class="sectionIcon">🎵</span>
-    <div class="sectionTitle">Spotify</div>
-    <div class="sectionSubtitle">Play songs & albums</div>
-  </div>
-
-  <!-- Kalesh Meter -->
-  <div class="sectionCard" id="kaleshSec">
-    <span class="sectionIcon">⚡</span>
-    <div class="sectionTitle">Kalesh Meter</div>
-    <div class="sectionSubtitle">Track vibes & conflicts</div>
-  </div>
-
-  <!-- Mood Meter -->
-  <div class="sectionCard" id="moodSec">
-    <span class="sectionIcon">😊</span>
-    <div class="sectionTitle">Mood Meter</div>
-    <div class="sectionSubtitle">Check your emotional state</div>
-  </div>
-
-  <!-- Paranormal Investigator -->
-  <div class="sectionCard" id="paranormalSec">
-    <span class="sectionIcon">👻</span>
-    <div class="sectionTitle">Paranormal Investigator</div>
-    <div class="sectionSubtitle">Spooky research zone</div>
-  </div>
-
-  <!-- Adult Room -->
-  <div class="sectionCard" id="adultSec">
-    <span class="sectionIcon">🔥</span>
-    <div class="sectionTitle">Adult Room</div>
-    <div class="sectionSubtitle">18+ private vibes</div>
-  </div>
-
-  <!-- Letters -->
-  <div class="sectionCard" id="lettersSec">
-    <span class="sectionIcon">✉️</span>
-    <div class="sectionTitle">Letters</div>
-    <div class="sectionSubtitle">Send secret love notes</div>
-  </div>
-
-  <!-- Mini Games -->
-  <div class="sectionCard" id="gamesSec">
-    <span class="sectionIcon">🎮</span>
-    <div class="sectionTitle">Mini Games</div>
-    <div class="sectionSubtitle">Play together, realtime</div>
-  </div>
-
-  <!-- Locked Surprise -->
-  <div class="sectionCard locked" id="lockedSec">
-    <span class="sectionIcon">🔒</span>
-    <div class="sectionTitle">Locked Area</div>
-    <div class="sectionSubtitle">Mystery unlocks later</div>
+  <div class="grid">
+    <div class="card letters">
+      <svg class="card-icon" viewBox="0 0 24 24"><path d="M2 4h20v16H2zM4 6l8 5 8-5"/></svg>
+      <h3>Delayed Love</h3>
+      <p>Letters</p>
+    </div>
+    <div class="card diary">
+      <svg class="card-icon" viewBox="0 0 24 24"><path d="M6 2h12v20H6z"/></svg>
+      <h3>Secret Thoughts</h3>
+      <p>Private Diary</p>
+    </div>
   </div>
 </div>
 
-<!-- ===== Scripts ===== -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
+<div class="divider"></div>
 
-// ===== Your Firebase config =====
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+<!-- Memories -->
+<div class="section">
+  <div class="section-title">
+    <svg viewBox="0 0 24 24"><path d="M12 5a3 3 0 100 6 3 3 0 000-6zm-7 14h14l-2-6H7l-2 6z"/></svg>
+    Memories
+  </div>
+  <div class="grid">
+    <div class="card snaps">
+      <svg class="card-icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>
+      <h3>Our Moments</h3>
+      <p>Snaps</p>
+    </div>
+    <div class="card songs">
+      <svg class="card-icon" viewBox="0 0 24 24"><path d="M12 3v14a3 3 0 11-2-2.83V5h8V3z"/></svg>
+      <h3>Melodies</h3>
+      <p>Songs</p>
+    </div>
+  </div>
+</div>
 
-// ===== Realtime sync for editable sections =====
-const editableSections = ['diarySec','snapsSec','lettersSec','kaleshSec','moodSec','paranormalSec','adultSec'];
-editableSections.forEach(id=>{
-  const el = document.getElementById(id);
-  const dbRef = ref(db,'dreamsOfParadise/'+id);
-  onValue(dbRef,snap=>{ if(snap.exists()){ el.innerHTML = snap.val(); } });
-  el.addEventListener('input', ()=>{ set(dbRef, el.innerHTML); });
-});
-
-// ===== Section clicks =====
-editableSections.forEach(id=>{
-  document.getElementById(id).onclick = ()=>{
-    const el=document.getElementById(id);
-    el.contentEditable = true;
-    el.focus();
-  }
-});
-
-// ===== Smokey Background Animation =====
-const canvas=document.getElementById('backgroundCanvas');
-const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-const particles=[];
-for(let i=0;i<120;i++){
-  particles.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    size: 1+Math.random()*3,
-    alpha:0.1+Math.random()*0.3,
-    speedX: -0.2+Math.random()*0.4,
-    speedY: -0.1+Math.random()*0.3
-  });
-}
-
-function animate(){
-  ctx.fillStyle='rgba(12,12,12,0.1)';
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fillStyle='rgba(255,182,193,'+p.alpha+')';
-    ctx.fill();
-    p.x += p.speedX;
-    p.y += p.speedY;
-    if(p.x<0)p.x=canvas.width;
-    if(p.x>canvas.width)p.x=0;
-    if(p.y<0)p.y=canvas.height;
-    if(p.y>canvas.height)p.y=0;
-  });
-  requestAnimationFrame(animate);
-}
-animate();
-</script>
+  </div>
 </body>
-    </html>
+        </html>
