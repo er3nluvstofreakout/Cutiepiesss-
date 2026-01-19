@@ -13,7 +13,6 @@
   --border:rgba(255,255,255,0.15);
   --text-soft:rgba(255,255,255,0.75);
 }
-
 *{box-sizing:border-box}
 body{
   margin:0;
@@ -22,8 +21,6 @@ body{
   background:radial-gradient(circle at top,#3b002a,#14000e 70%);
   overflow-x:hidden;
 }
-
-/* Smokey background */
 .smoke{
   position:fixed;
   inset:0;
@@ -37,14 +34,11 @@ body{
   from{transform:translateY(0)}
   to{transform:translateY(-40px)}
 }
-
 .container{
   max-width:430px;
   margin:auto;
   padding:18px;
 }
-
-/* Header */
 .header{
   background:rgba(0,0,0,0.25);
   border:1px solid var(--border);
@@ -65,23 +59,17 @@ body{
   color:var(--text-soft);
   font-style:italic;
 }
-
-/* Section title */
 .section-title{
   margin:18px 6px 12px;
   font-size:18px;
   font-weight:500;
   opacity:.9;
 }
-
-/* GRID — UNCHANGED */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:14px;
 }
-
-/* Card base */
 .card{
   border-radius:18px;
   padding:18px 16px;
@@ -89,11 +77,13 @@ body{
   background:var(--glass);
   border:1px solid var(--border);
   backdrop-filter:blur(12px);
-  transition:transform .2s ease, box-shadow .2s ease;
+  transition:.25s;
+  text-decoration:none;
+  color:white;
 }
 .card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 30px rgba(0,0,0,0.4);
+  transform:translateY(-4px);
+  box-shadow:0 14px 35px rgba(0,0,0,.45);
 }
 .card h3{
   font-family:'Playfair Display',serif;
@@ -106,24 +96,18 @@ body{
   color:var(--text-soft);
 }
 
-/* Card vibes */
 .love{background:linear-gradient(135deg,#6a143c,#3b0d25)}
 .diary{background:linear-gradient(135deg,#4a2a6b,#28163b)}
 .snaps{background:linear-gradient(135deg,#6b2d2d,#3b1616)}
-.songs{background:linear-gradient(135deg,#3a3a3a,#1c1c1c)}
 .spotify{background:linear-gradient(135deg,#0f3d2e,#08251c)}
 .meters{background:linear-gradient(135deg,#5a1220,#2a0810)}
-.relationship{background:linear-gradient(135deg,#5c1b4b,#2b0d23)}
-.events{background:linear-gradient(135deg,#2b3d5c,#141d2b)}
-.notes{background:linear-gradient(135deg,#3c3c5c,#1a1a2e)}
 .paranormal{background:linear-gradient(135deg,#1a1a2e,#000)}
 .adult{background:linear-gradient(135deg,#4b0018,#140008)}
 .locked{background:linear-gradient(135deg,#111,#000)}
-
 </style>
 </head>
-<body>
 
+<body>
 <div class="smoke"></div>
 
 <div class="container">
@@ -145,36 +129,13 @@ body{
     </div>
   </div>
 
-  <div class="section-title">Memories</div>
-  <div class="grid">
-    <div class="card snaps">
-      <h3>Our Moments</h3>
-      <p>Snaps</p>
-    </div>
-    <div class="card songs">
-      <h3>Melodies</h3>
-      <p>Songs</p>
-    </div>
-  </div>
-
-  <div class="section-title">Music & Mood</div>
-  <div class="grid">
-    <div class="card spotify">
-      <h3>Spotify Room</h3>
-      <p>Shared playlists</p>
-    </div>
-    <div class="card meters">
-      <h3>Mood Meters</h3>
-      <p>Kalesh · Love · Energy</p>
-    </div>
-  </div>
-
   <div class="section-title">Mystery & Desire</div>
   <div class="grid">
-    <div class="card paranormal">
+    <!-- 🔗 CONNECTED -->
+    <a href="paranormal.html" class="card paranormal">
       <h3>Paranormal Investigator</h3>
       <p>Logs · Evidence · Notes</p>
-    </div>
+    </a>
     <div class="card adult">
       <h3>Adult Room (18+)</h3>
       <p>Private · Dark · Intimate</p>
@@ -183,9 +144,9 @@ body{
 
   <div class="section-title">Extras</div>
   <div class="grid">
-    <div class="card notes">
-      <h3>Random Notes</h3>
-      <p>Thought dumps</p>
+    <div class="card spotify">
+      <h3>Spotify Room</h3>
+      <p>Shared playlists</p>
     </div>
     <div class="card locked">
       <h3>Locked Room</h3>
@@ -195,4 +156,4 @@ body{
 
 </div>
 </body>
-  </html>
+</html>
