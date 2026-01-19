@@ -4,258 +4,193 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* ===== General Styles ===== */
-body {
-  margin:0;
-  padding:0;
-  font-family:'Segoe UI',sans-serif;
-  background: #0d0d0d;
-  overflow-x:hidden;
-  color:#fff;
-}
+  /* ===== General Styles ===== */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    background: #1b0b1c;
+    overflow-x: hidden;
+  }
 
-/* ===== Site Title ===== */
-header {
-  text-align:center;
-  margin:20px 0;
-  font-size:2.5em;
-  font-family: 'Lucida Handwriting', cursive;
-  color: #ffc0cb;
-  background: rgba(255,255,255,0.05);
-  padding: 10px 20px;
-  border-radius: 15px;
-  display:inline-block;
-  position: relative;
-  z-index:2;
-}
+  /* ===== Animated smoky romantic background ===== */
+  #background {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    background: linear-gradient(45deg, #2b0a2b, #4a0b4a, #7a0c7a);
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 192, 203, 0.15);
+    pointer-events: none;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.3); opacity:0; }
+    50% { opacity:0.7; }
+    100% { transform: translateY(-10vh) scale(1); opacity:0; }
+  }
 
-/* ===== Animated smoky romantic background ===== */
-#bgCanvas {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:0;
-  pointer-events:none;
-}
+  /* ===== Page Header ===== */
+  header {
+    text-align: center;
+    padding: 40px 20px 20px 20px;
+    font-family: 'Pacifico', cursive;
+  }
+  header h1 {
+    font-size: 2.8em;
+    margin: 0;
+    color: #ffb6c1;
+    text-shadow: 0 0 10px rgba(255,182,193,0.7);
+  }
+  header p {
+    font-size: 1.1em;
+    color: #f8f8f8;
+    opacity: 0.8;
+  }
 
-/* ===== Grid for homepage sections ===== */
-.grid {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-  margin:40px auto;
-  max-width:1200px;
-  position: relative;
-  z-index:1;
-}
+  /* ===== Sections ===== */
+  .section-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px;
+    gap: 20px;
+  }
+  .card {
+    min-width: 160px;
+    flex: 0 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px 15px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(255,182,193,0.5);
+  }
+  .card h2 {
+    font-family: 'Pacifico', cursive;
+    margin: 15px 0 5px 0;
+    font-size: 1.2em;
+  }
+  .card p {
+    font-size: 0.85em;
+    opacity: 0.8;
+    color: #fff;
+  }
 
-/* ===== Section cards ===== */
-.section-card {
-  position:relative;
-  flex:1 1 200px;
-  max-width:220px;
-  min-height:180px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border-radius:20px;
-  padding:20px;
-  text-align:center;
-  cursor:pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.section-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 25px rgba(255,192,203,0.6);
-}
-
-.section-card img {
-  width:60px;
-  height:60px;
-  margin-bottom:15px;
-  filter: drop-shadow(0 0 5px #ff69b4);
-}
-
-.section-card h3 {
-  margin:0;
-  font-size:1.2em;
-  font-family: 'Lucida Handwriting', cursive;
-  color:#ffc0cb;
-}
-
-.section-card p {
-  font-size:0.9em;
-  color: #eee;
-  margin-top:5px;
-}
-
-/* ===== Editable sections ===== */
-.collapsible {
-  min-height:50px;
-  padding:10px;
-  border-radius:10px;
-  background: rgba(0,0,0,0.4);
-  margin-top:10px;
-  display:none;
-  overflow:auto;
-  font-family:'Segoe UI',sans-serif;
-}
-
-/* ===== Specific themed sections ===== */
-#adultRoom { background: rgba(60,0,30,0.6); }
-#paranormal { background: rgba(20,20,40,0.6); }
-#snapRoom { background: rgba(40,0,40,0.5); }
-
-/* ===== Buttons ===== */
-button {
-  padding:5px 10px;
-  margin:5px;
-  border-radius:5px;
-  border:none;
-  cursor:pointer;
-}
-
-/* ===== Locked Section ===== */
-.locked {
-  color:#999;
-  background: rgba(255,192,203,0.1);
-  text-align:center;
-  padding:10px;
-  border-radius:10px;
-}
-
-/* ===== Footer ===== */
-footer {
-  text-align:center;
-  margin:50px 0 20px 0;
-  font-size:0.9em;
-  color:#aaa;
-}
+  /* ===== Scrollbar Style ===== */
+  .section-row::-webkit-scrollbar {
+    height: 8px;
+  }
+  .section-row::-webkit-scrollbar-thumb {
+    background: rgba(255, 182, 193, 0.6);
+    border-radius: 10px;
+  }
 </style>
 </head>
 <body>
 
-<canvas id="bgCanvas"></canvas>
+<div id="background"></div>
 
-<header>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</header>
+<header>
+  <h1>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</h1>
+  <p>our private moody universe</p>
+</header>
 
-<div class="grid">
-  <!-- Personal Diary -->
-  <div class="section-card" onclick="toggleSection('diarySec')">
-    <img src="https://img.icons8.com/ios-filled/100/ffffff/journal.png" alt="Diary">
-    <h3>Private Diary</h3>
-    <p>Write your secret thoughts</p>
-    <div id="diarySec" class="collapsible" contenteditable="true"></div>
+<section>
+  <h2 style="margin-left:20px;">💌 Feelings</h2>
+  <div class="section-row">
+    <div class="card">
+      <h2>Delayed Love</h2>
+      <p>Letters</p>
+    </div>
+    <div class="card">
+      <h2>Secret Thoughts</h2>
+      <p>Private Diary</p>
+    </div>
   </div>
+</section>
 
-  <!-- Snap Room -->
-  <div class="section-card" onclick="toggleSection('snapSec')">
-    <img src="https://img.icons8.com/ios-filled/100/ffffff/camera.png" alt="Snap">
-    <h3>Snap Room</h3>
-    <p>Share your moments</p>
-    <div id="snapSec" class="collapsible" contenteditable="true"></div>
+<section>
+  <h2 style="margin-left:20px;">📸 Memories</h2>
+  <div class="section-row">
+    <div class="card">
+      <h2>Our Moments</h2>
+      <p>Snaps</p>
+    </div>
+    <div class="card">
+      <h2>Melodies of Us</h2>
+      <p>Songs</p>
+    </div>
+    <div class="card">
+      <h2>Our Tunes</h2>
+      <p>Spotify</p>
+    </div>
   </div>
+</section>
 
-  <!-- Kalesh Meter -->
-  <div class="section-card" onclick="toggleSection('kaleshSec')">
-    <img src="https://img.icons8.com/ios-filled/100/ffffff/lightning-bolt.png" alt="Kalesh">
-    <h3>Kalesh Meter</h3>
-    <p>Track our cute fights</p>
-    <div id="kaleshSec" class="collapsible" contenteditable="true"></div>
+<section>
+  <h2 style="margin-left:20px;">🎮 Fun</h2>
+  <div class="section-row">
+    <div class="card">
+      <h2>Play Together</h2>
+      <p>Games</p>
+    </div>
+    <div class="card">
+      <h2>Mystery Box</h2>
+      <p>Locked</p>
+    </div>
   </div>
+</section>
 
-  <!-- Spotify Section -->
-  <div class="section-card" onclick="toggleSection('spotifySec')">
-    <img src="https://img.icons8.com/ios-filled/100/ffffff/spotify.png" alt="Spotify">
-    <h3>Vibe Tunes</h3>
-    <p>Listen & share music</p>
-    <div id="spotifySec" class="collapsible" contenteditable="true"></div>
+<section>
+  <h2 style="margin-left:20px;">🕵️‍♂️ Secret Zones</h2>
+  <div class="section-row">
+    <div class="card">
+      <h2>Paranormal Zone</h2>
+      <p>Investigator Room</p>
+    </div>
+    <div class="card">
+      <h2>Moonlight Room</h2>
+      <p>18+ Adult Room</p>
+    </div>
+    <div class="card">
+      <h2>Hidden Areas</h2>
+      <p>Secret</p>
+    </div>
   </div>
-
-  <!-- Paranormal Investigator -->
-  <div class="section-card" onclick="toggleSection('paranormal')">
-    <img src="https://img.icons8.com/ios-filled/100/ffffff/ghost.png" alt="Paranormal">
-    <h3>Investigator Zone</h3>
-    <p>Explore spooky mysteries</p>
-    <div id="paranormal" class="collapsible" contenteditable="true"></div>
-  </div>
-
-  <!-- Adult Room -->
-  <div class="section-card" onclick="toggleSection('adultRoom')">
-    <img src="https://img.icons8.com/ios-filled/100/ffffff/love.png" alt="Adult">
-    <h3>Adult Room</h3>
-    <p>Private adult vibes</p>
-    <div id="adultRoom" class="collapsible" contenteditable="true"></div>
-  </div>
-
-  <!-- Mini Games -->
-  <div class="section-card" onclick="toggleSection('gamesSec')">
-    <img src="https://img.icons8.com/ios-filled/100/ffffff/game-controller.png" alt="Games">
-    <h3>Mini Games</h3>
-    <p>Play together</p>
-    <div id="gamesSec" class="collapsible"></div>
-  </div>
-
-  <!-- Locked Surprise -->
-  <div class="section-card">
-    <img src="https://img.icons8.com/ios-filled/100/ffffff/lock.png" alt="Locked">
-    <h3>Secret Surprise</h3>
-    <p>Will unlock later 😏</p>
-    <div id="lockedSec" class="collapsible locked"></div>
-  </div>
-</div>
-
-<footer>💖 𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</footer>
+</section>
 
 <script>
-// ===== Toggle sections =====
-function toggleSection(id){
-  const sec=document.getElementById(id);
-  sec.style.display = (sec.style.display==='block')?'none':'block';
-}
-
-// ===== Floating smoky animated background =====
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const particles = [];
-for(let i=0;i<150;i++){
-  particles.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    radius: 2+Math.random()*3,
-    speed: 0.2+Math.random()*0.5,
-    alpha: 0.1+Math.random()*0.3
-  });
-}
-
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    p.y -= p.speed;
-    if(p.y<0) p.y=canvas.height;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
-    ctx.fillStyle = `rgba(255,192,203,${p.alpha})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(animate);
-}
-animate();
-
-// ===== Mini games placeholder =====
-document.getElementById('gamesSec').innerHTML = `
-  <button onclick="alert('Tic Tac Toe placeholder')">Tic Tac Toe</button>
-  <button onclick="alert('Dice Roll placeholder')">Dice Roll</button>
-  <button onclick="alert('Memory Game placeholder')">Memory Game</button>
-  <button onclick="alert('Rock Paper Scissors placeholder')">Rock Paper Scissors</button>
-`;
+  // ===== Generate particles for background =====
+  const background = document.getElementById('background');
+  for(let i=0;i<60;i++){
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    let size = Math.random()*10+5;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${Math.random()*100}vw`;
+    particle.style.animationDuration = `${Math.random()*20+10}s`;
+    particle.style.background = `rgba(255,192,203,${Math.random()*0.3+0.1})`;
+    background.appendChild(particle);
+  }
 </script>
+
 </body>
-    </html>
+</html>
