@@ -1,172 +1,197 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dreams Of Paradise~</title>  <!-- Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">  <style>
-    :root{
-      --glass: rgba(255,255,255,0.12);
-      --blur: blur(18px);
-      --radius: 22px;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dreams Of Paradise~</title>
 
-    *{box-sizing:border-box;margin:0;padding:0}
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-    body{
-      min-height:100vh;
-      font-family:'Poppins',sans-serif;
-      background: radial-gradient(circle at top, #2a001f, #0b0010 70%);
-      color:#fff;
-      overflow-x:hidden;
-    }
+<style>
+:root{
+  --bg-main:#2b001f;
+  --glass:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.15);
+  --text-soft:rgba(255,255,255,0.75);
+}
 
-    /* Smokey animated background */
-    body::before, body::after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      background:radial-gradient(circle, rgba(255,0,120,.15), transparent 60%);
-      animation: smoke 30s linear infinite;
-      z-index:-1;
-    }
-    body::after{
-      animation-duration:45s;
-      opacity:.6;
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  color:white;
+  background:radial-gradient(circle at top,#3b002a,#14000e 70%);
+  overflow-x:hidden;
+}
 
-    @keyframes smoke{
-      0%{transform:translate(0,0) scale(1)}
-      50%{transform:translate(-10%,10%) scale(1.2)}
-      100%{transform:translate(0,0) scale(1)}
-    }
+/* Smokey background */
+.smoke{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(255,0,120,0.12),transparent 40%),
+    radial-gradient(circle at 80% 70%,rgba(120,0,255,0.12),transparent 40%);
+  animation: drift 20s infinite alternate ease-in-out;
+  z-index:-1;
+}
+@keyframes drift{
+  from{transform:translateY(0)}
+  to{transform:translateY(-40px)}
+}
 
-    header{
-      display:flex;
-      justify-content:center;
-      padding:32px 16px 18px;
-    }
+.container{
+  max-width:430px;
+  margin:auto;
+  padding:18px;
+}
 
-    .title-frame{
-      padding:18px 26px;
-      border-radius:28px;
-      background:rgba(0,0,0,.35);
-      backdrop-filter:blur(20px);
-      border:1px solid rgba(255,255,255,.15);
-      text-align:center;
-    }
+/* Header */
+.header{
+  background:rgba(0,0,0,0.25);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:22px 18px;
+  text-align:center;
+  margin-bottom:26px;
+}
+.header h1{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  color:#ff9ecb;
+  margin:0;
+}
+.header p{
+  margin-top:6px;
+  font-size:14px;
+  color:var(--text-soft);
+  font-style:italic;
+}
 
-    .title-frame h1{
-      font-family:'Playfair Display',serif;
-      font-size:30px;
-      color:#ff9ad5;
-    }
+/* Section title */
+.section-title{
+  margin:18px 6px 12px;
+  font-size:18px;
+  font-weight:500;
+  opacity:.9;
+}
 
-    .title-frame p{
-      font-size:13px;
-      opacity:.8;
-      margin-top:6px;
-      font-style:italic;
-    }
+/* Grid – DO NOT CHANGE */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
 
-    .section{
-      padding:18px 18px 6px;
-    }
+/* Card base */
+.card{
+  border-radius:18px;
+  padding:18px 16px;
+  min-height:110px;
+  background:var(--glass);
+  border:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.4);
+}
+.card h3{
+  font-family:'Playfair Display',serif;
+  margin:0;
+  font-size:18px;
+}
+.card p{
+  margin-top:6px;
+  font-size:13px;
+  color:var(--text-soft);
+}
 
-    .section h2{
-      font-size:18px;
-      font-weight:500;
-      margin-bottom:14px;
-      opacity:.9;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
+/* Unique vibes */
+.love{background:linear-gradient(135deg,#6a143c,#3b0d25)}
+.diary{background:linear-gradient(135deg,#4a2a6b,#28163b)}
+.snaps{background:linear-gradient(135deg,#6b2d2d,#3b1616)}
+.songs{background:linear-gradient(135deg,#3a3a3a,#1c1c1c)}
+.spotify{background:linear-gradient(135deg,#0f3d2e,#08251c)}
+.meters{background:linear-gradient(135deg,#5a1220,#2a0810)}
+.relationship{background:linear-gradient(135deg,#5c1b4b,#2b0d23)}
+.events{background:linear-gradient(135deg,#2b3d5c,#141d2b)}
+.notes{background:linear-gradient(135deg,#3c3c5c,#1a1a2e)}
+.locked{background:linear-gradient(135deg,#111,#000)}
 
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
+</style>
+</head>
+<body>
 
-    .card{
-      min-height:120px;
-      padding:16px;
-      border-radius:var(--radius);
-      backdrop-filter:var(--blur);
-      border:1px solid rgba(255,255,255,.15);
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      transition:.3s ease;
-    }
+<div class="smoke"></div>
 
-    .card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 18px 40px rgba(0,0,0,.45);
-    }
+<div class="container">
 
-    .card h3{
-      font-family:'Playfair Display',serif;
-      font-size:18px;
-      margin-bottom:6px;
-    }
-
-    .card span{
-      font-size:13px;
-      opacity:.75;
-    }
-
-    /* Unique section vibes */
-    .letters{background:linear-gradient(135deg,rgba(255,120,170,.25),rgba(120,0,80,.25))}
-    .diary{background:linear-gradient(135deg,rgba(180,140,255,.25),rgba(50,0,90,.25))}
-
-    .snaps{background:linear-gradient(135deg,rgba(255,220,120,.25),rgba(120,80,0,.25))}
-    .songs{background:linear-gradient(135deg,rgba(120,255,180,.25),rgba(0,80,40,.25))}
-
-    .spotify{background:linear-gradient(135deg,rgba(30,215,96,.25),rgba(10,70,40,.25))}
-    .meters{background:linear-gradient(135deg,rgba(255,80,80,.25),rgba(90,0,0,.25))}
-
-    .paranormal{background:linear-gradient(135deg,rgba(180,180,180,.2),rgba(30,30,30,.35))}
-    .adult{background:linear-gradient(135deg,rgba(120,0,0,.35),rgba(20,0,0,.45))}
-
-    .games{background:linear-gradient(135deg,rgba(120,160,255,.25),rgba(20,40,90,.25))}
-    .locked{background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(0,0,0,.35))}
-
-    footer{height:40px}
-  </style></head>
-<body><header>
-  <div class="title-frame">
-    <h1>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</h1>
+  <div class="header">
+    <h1>Dreams Of Paradise~</h1>
     <p>our private moody universe</p>
   </div>
-</header><section class="section">
-  <h2>Feelings</h2>
+
+  <div class="section-title">Feelings</div>
   <div class="grid">
-    <div class="card letters"><h3>Delayed Love</h3><span>Letters (1h delivery)</span></div>
-    <div class="card diary"><h3>Secret Thoughts</h3><span>Private Diary</span></div>
+    <div class="card love">
+      <h3>Delayed Love</h3>
+      <p>Letters (1h delivery)</p>
+    </div>
+    <div class="card diary">
+      <h3>Secret Thoughts</h3>
+      <p>Private Diary</p>
+    </div>
   </div>
-</section><section class="section">
-  <h2>Memories</h2>
+
+  <div class="section-title">Memories</div>
   <div class="grid">
-    <div class="card snaps"><h3>Our Moments</h3><span>Snaps</span></div>
-    <div class="card songs"><h3>Melodies</h3><span>Songs</span></div>
+    <div class="card snaps">
+      <h3>Our Moments</h3>
+      <p>Snaps</p>
+    </div>
+    <div class="card songs">
+      <h3>Melodies</h3>
+      <p>Songs</p>
+    </div>
   </div>
-</section><section class="section">
-  <h2>Music & Mood</h2>
+
+  <div class="section-title">Music & Mood</div>
   <div class="grid">
-    <div class="card spotify"><h3>Spotify Room</h3><span>Shared playlists</span></div>
-    <div class="card meters"><h3>Mood Meters</h3><span>Kalesh · Love · Energy</span></div>
+    <div class="card spotify">
+      <h3>Spotify Room</h3>
+      <p>Shared playlists</p>
+    </div>
+    <div class="card meters">
+      <h3>Mood Meters</h3>
+      <p>Kalesh · Love · Energy</p>
+    </div>
   </div>
-</section><section class="section">
-  <h2>Secrets</h2>
+
+  <div class="section-title">Us</div>
   <div class="grid">
-    <div class="card paranormal"><h3>Paranormal Files</h3><span>Investigator logs</span></div>
-    <div class="card adult"><h3>Adult Room (18+)</h3><span>Locked & intimate</span></div>
+    <div class="card relationship">
+      <h3>Relationship Tracker</h3>
+      <p>Milestones · Growth</p>
+    </div>
+    <div class="card events">
+      <h3>Event Tracker</h3>
+      <p>Dates · Plans</p>
+    </div>
   </div>
-</section><section class="section">
-  <h2>Fun</h2>
+
+  <div class="section-title">Extras</div>
   <div class="grid">
-    <div class="card games"><h3>Mini Games</h3><span>Play together</span></div>
-    <div class="card locked"><h3>Locked Surprises</h3><span>Unlock later</span></div>
+    <div class="card notes">
+      <h3>Random Notes</h3>
+      <p>Thought dumps</p>
+    </div>
+    <div class="card locked">
+      <h3>Locked Room</h3>
+      <p>Unlock surprises</p>
+    </div>
   </div>
-</section><footer></footer></body>
-                                                   </html>
+
+</div>
+</body>
+      </html>
