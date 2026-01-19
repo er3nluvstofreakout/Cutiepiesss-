@@ -1,287 +1,158 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paranormal Investigation Dept</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:'Montserrat',sans-serif;
-  background:#0d0a0f;
-  color:#eee;
-  overflow-x:hidden;
-}
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url('https://images.unsplash.com/photo-1508612761958-e93145c01d7c') center/cover no-repeat;
-  opacity:0.05;
-  filter:blur(3px);
-  z-index:-2;
-}
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,.85),rgba(0,0,0,.95));
-  z-index:-1;
-}
-
-.torch{
-  position:fixed;
-  width:500px;
-  height:500px;
-  background:radial-gradient(circle, rgba(255,255,255,0.12), transparent 60%);
-  pointer-events:none;
-  mix-blend-mode:screen;
-  filter:blur(10px);
-  z-index:5;
-}
-
-header{
-  padding:20px;
-  text-align:center;
-}
-header h1{
-  font-family:'Playfair Display',serif;
-  font-size:2rem;
-  font-style:italic;
-  color:#ff8fb3;
-}
-header p{opacity:.7;font-size:.9rem;}
-
-.dashboard{
-  position:relative;
-  width:90%;
-  max-width:1000px;
-  margin:20px auto;
-  height:700px;
-  background:rgba(30,20,28,0.7);
-  border-radius:16px;
-  backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.08);
-  overflow:hidden;
-}
-
-.case-card,.sticky-note,.image-card{
-  position:absolute;
-  background:rgba(50,0,40,0.85);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:12px;
-  padding:8px;
-  cursor:move;
-  color:#fff;
-}
-.case-card h4,.sticky-note h4{
-  font-family:'Playfair Display',serif;
-  font-size:14px;
-}
-.case-card p,.sticky-note p{font-size:12px;opacity:.8;}
-
-.image-card img{
-  width:100px;
-  height:100px;
-  object-fit:cover;
-  border-radius:8px;
-}
-
-.log-panel{
-  position:absolute;
-  right:10px;
-  top:10px;
-  width:220px;
-  height:180px;
-  background:rgba(0,0,0,0.5);
-  border-radius:12px;
-  padding:8px;
-  font-size:12px;
-  overflow-y:auto;
-}
-
-.meter{
-  position:absolute;
-  left:10px;
-  top:10px;
-  width:150px;
-  height:12px;
-  background:rgba(100,0,0,0.2);
-  border-radius:6px;
-}
-.meter-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#ff0000,#ff5555);
-  border-radius:6px;
-  transition:.5s;
-}
-
-.desk{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:160px;
-  background:rgba(20,10,15,0.9);
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-}
-.desk-item{
-  background:rgba(40,20,30,0.9);
-  padding:12px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:12px;
-}
-.desk-item:hover{transform:scale(1.05);}
-
-.add-buttons{
-  position:absolute;
-  bottom:170px;
-  left:50%;
-  transform:translateX(-50%);
-}
-.add-buttons button{
-  padding:6px 10px;
-  border:none;
-  border-radius:8px;
-  background:#2b151c;
-  color:white;
-  cursor:pointer;
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:20;
-}
-.modal-box{
-  background:#120a10;
-  padding:20px;
-  border-radius:12px;
-  max-width:350px;
-}
-.modal button{
-  margin-top:10px;
-  padding:6px 12px;
-  border:none;
-  background:#2b151c;
-  color:white;
-  border-radius:6px;
-}
-</style>
-</head>
-
-<body>
-<div class="torch" id="torch"></div>
-
-<header>
-  <h1>Paranormal Investigation Dept.</h1>
-  <p>Confidential • Internal Use Only</p>
-</header>
-
-<div class="dashboard" id="dashboard">
-
-  <div class="case-card" style="top:300px;left:420px" contenteditable>
-    <h4>Zoey</h4><p>Missing — 23 Dec</p>
-  </div>
-
-  <div class="log-panel" id="activity-log">
-    <h4>Activity Log</h4>
-  </div>
-
-  <div class="meter"><div class="meter-fill" id="meter"></div></div>
-
-  <div class="desk">
-    <div class="desk-item" id="desk-phone">📱 Phone</div>
-    <div class="desk-item" id="desk-clipboard">📋 Clipboard</div>
-    <div class="desk-item" id="desk-mug">☕ Coffee</div>
-    <div class="desk-item" id="desk-magazine">📖 Magazine</div>
-    <div class="desk-item" id="desk-emf">📡 EMF</div>
-    <div class="desk-item" id="desk-camera">📸 Camera</div>
-    <div class="desk-item" id="desk-spirit">📻 Spirit Box</div>
-    <div class="desk-item" id="desk-thermo">🌡️ Thermometer</div>
-  </div>
-
-  <div class="add-buttons">
-    <button id="add-note">+ Note</button>
-    <button id="add-image">+ Image</button>
-  </div>
-</div>
-
-<div class="modal" id="modal">
-  <div class="modal-box" id="modal-content"></div>
-</div>
-
-<script>
 const torch=document.getElementById('torch');
 const dashboard=document.getElementById('dashboard');
 const meter=document.getElementById('meter');
-const log=document.getElementById('activity-log');
 const modal=document.getElementById('modal');
 const modalContent=document.getElementById('modal-content');
+const log=document.getElementById('activity-log');
 
-document.addEventListener('mousemove',e=>{
+// Torch follow
+document.addEventListener('mousemove', e=>{
   torch.style.left=e.clientX-250+'px';
   torch.style.top=e.clientY-250+'px';
 });
 
-setInterval(()=>meter.style.width=Math.random()*100+'%',1000);
+// Signal Meter Animation
+setInterval(()=>{meter.style.width=Math.floor(Math.random()*100)+'%';},1000);
 
-function logActivity(text){
-  const t=new Date();
-  log.innerHTML+=`• ${t.getHours()}:${t.getMinutes()} — ${text}<br>`;
-  log.scrollTop=log.scrollHeight;
+// Draggable function
+function makeDraggable(el){
+  let isDragging=false, offsetX=0, offsetY=0;
+  el.addEventListener('mousedown', e=>{
+    isDragging=true;
+    offsetX=e.offsetX;
+    offsetY=e.offsetY;
+  });
+  document.addEventListener('mouseup', e=>{isDragging=false; saveState();});
+  document.addEventListener('mousemove', e=>{
+    if(!isDragging) return;
+    el.style.left=e.clientX-offsetX+'px';
+    el.style.top=e.clientY-offsetY+'px';
+  });
 }
 
-function openModal(html){
-  modalContent.innerHTML=html+'<br><button onclick="closeModal()">Close</button>';
-  modal.style.display='flex';
-}
-function closeModal(){modal.style.display='none';}
+// Make draggable initial cards
+document.querySelectorAll('.case-card').forEach(makeDraggable);
 
-document.querySelectorAll('.desk-item').forEach(item=>{
-  item.onclick=()=>{
-    if(item.id==='desk-emf'){
-      const r=Math.floor(Math.random()*5)+1;
-      logActivity(`EMF spike detected (${r} mG)`);
-      openModal(`<p>EMF Reading: ${r} mG</p>`);
-    }
-    if(item.id==='desk-spirit'){
-      logActivity('Spirit box whispers detected');
-      openModal('<p>"...help...leave..."</p>');
-    }
-    if(item.id==='desk-camera'){
-      logActivity('Paranormal photo captured');
-      openModal('<img src="https://images.unsplash.com/photo-1566231552953-11b0c1abbdc0" width="250">');
-    }
-    if(item.id==='desk-thermo'){
-      const t=Math.floor(Math.random()*10)+15;
-      logActivity(`Temperature drop: ${t}°C`);
-      openModal(`<p>Temperature: ${t}°C</p>`);
-    }
-    if(item.id==='desk-clipboard'){
-      openModal('<textarea style="width:250px;height:120px;">Write notes...</textarea>');
-    }
-    if(item.id==='desk-phone'){
-      openModal('<p>Missed call: Unknown Number</p>');
-    }
-    if(item.id==='desk-mug'){
-      openModal('<p>Coffee keeps you sane ☕</p>');
-    }
-    if(item.id==='desk-magazine'){
-      openModal('<p>Occult Weekly — Issue #13</p>');
-    }
-  };
+// Sticky Notes & Images
+document.getElementById('add-note').addEventListener('click',()=>{
+  const note=document.createElement('div');
+  note.className='sticky-note';
+  note.style.top='50px';
+  note.style.left='50px';
+  note.contentEditable=true;
+  note.innerHTML='<h4>New Note</h4><p>Edit me...</p>';
+  dashboard.appendChild(note);
+  makeDraggable(note);
+  saveState();
 });
-</script>
-</body>
-      </html>
+
+document.getElementById('add-image').addEventListener('click',()=>{
+  const input=document.createElement('input');
+  input.type='file';
+  input.accept='image/*';
+  input.onchange=e=>{
+    const file=e.target.files[0];
+    if(!file) return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const imgCard=document.createElement('div');
+      imgCard.className='image-card';
+      imgCard.style.top='100px';
+      imgCard.style.left='100px';
+      imgCard.innerHTML=`<img src="${ev.target.result}">`;
+      dashboard.appendChild(imgCard);
+      makeDraggable(imgCard);
+      logActivity("Ghost snapshot added!");
+      saveState();
+    }
+    reader.readAsDataURL(file);
+  };
+  input.click();
+});
+
+// Modal functions
+function openModal(content){
+  modalContent.innerHTML=content;
+  modal.style.display='block';
+}
+document.getElementById('close-modal').addEventListener('click',()=>{modal.style.display='none';});
+
+// Desk items
+document.getElementById('desk-clipboard').addEventListener('click',()=>{openModal('<textarea>New notes...</textarea>');});
+document.getElementById('desk-magazine').addEventListener('click',()=>{openModal('<p>Magazine contents...</p>');});
+document.getElementById('desk-phone').addEventListener('click',()=>{openModal('<p>Incoming Call Logs...</p>');});
+document.getElementById('desk-mug').addEventListener('click',()=>{openModal('<p>Just coffee ☕</p>');});
+
+// Paranormal Gadgets with Activity Log updates
+function logActivity(text){
+  const time=new Date();
+  const h=time.getHours().toString().padStart(2,'0');
+  const m=time.getMinutes().toString().padStart(2,'0');
+  log.innerHTML += `• ${h}:${m} – ${text}<br>`;
+  log.scrollTop = log.scrollHeight;
+}
+
+document.getElementById('desk-emf').addEventListener('click',()=>{
+  const reading=Math.floor(Math.random()*5)+1;
+  openModal(`<p>EMF Reading: ${reading} mG</p>`);
+  logActivity(`EMF Reading detected: ${reading} mG`);
+});
+
+document.getElementById('desk-camera').addEventListener('click',()=>{
+  openModal('<p>Paranormal Snapshot Captured!</p><img src="https://images.unsplash.com/photo-1566231552953-11b0c1abbdc0" alt="ghost">');
+  logActivity("Ghost snapshot taken");
+});
+
+document.getElementById('desk-spirit').addEventListener('click',()=>{
+  openModal('<p>Spirit Box Activated: "Whisper... Whisper..."</p>');
+  logActivity("Spirit whispers detected");
+});
+
+document.getElementById('desk-thermo').addEventListener('click',()=>{
+  const temp=Math.floor(Math.random()*10)+15;
+  openModal(`<p>Temperature: ${temp}°C</p>`);
+  logActivity(`Temperature drop detected: ${temp}°C`);
+});
+
+// Save & Load Board State
+function saveState(){
+  const items=[];
+  dashboard.querySelectorAll('.case-card, .sticky-note, .image-card').forEach(el=>{
+    items.push({type:el.className, html:el.innerHTML, top:el.style.top, left:el.style.left});
+  });
+  localStorage.setItem('dashboardItems',JSON.stringify(items));
+  localStorage.setItem('activityLog',log.innerHTML);
+}
+
+function loadState(){
+  const items=JSON.parse(localStorage.getItem('dashboardItems')||'[]');
+  dashboard.querySelectorAll('.case-card, .sticky-note, .image-card').forEach(el=>el.remove());
+  items.forEach(item=>{
+    const el=document.createElement('div');
+    el.className=item.type;
+    el.innerHTML=item.html;
+    el.style.top=item.top;
+    el.style.left=item.left;
+    dashboard.appendChild(el);
+    makeDraggable(el);
+  });
+  log.innerHTML=localStorage.getItem('activityLog')||log.innerHTML;
+}
+window.addEventListener('load',loadState);
+window.addEventListener('beforeunload',saveState);
+
+// Make all new elements draggable
+function makeDraggable(el){
+  let isDragging=false, offsetX=0, offsetY=0;
+  el.addEventListener('mousedown', e=>{
+    isDragging=true;
+    offsetX=e.offsetX;
+    offsetY=e.offsetY;
+  });
+  document.addEventListener('mouseup', e=>{isDragging=false; saveState();});
+  document.addEventListener('mousemove', e=>{
+    if(!isDragging) return;
+    el.style.left=e.clientX-offsetX+'px';
+    el.style.top=e.clientY-offsetY+'px';
+  });
+}
