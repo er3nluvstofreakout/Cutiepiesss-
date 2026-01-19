@@ -1,172 +1,245 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dreams Of Paradise~</title>  <!-- Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">  <style>
-    :root{
-      --glass: rgba(255,255,255,0.12);
-      --blur: blur(18px);
-      --radius: 22px;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</title>
 
-    *{box-sizing:border-box;margin:0;padding:0}
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
-    body{
-      min-height:100vh;
-      font-family:'Poppins',sans-serif;
-      background: radial-gradient(circle at top, #2a001f, #0b0010 70%);
-      color:#fff;
-      overflow-x:hidden;
-    }
+<style>
+/* ===== RESET ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Montserrat',sans-serif;
+  background:#0b0b10;
+  color:#eee;
+  overflow-x:hidden;
+}
 
-    /* Smokey animated background */
-    body::before, body::after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      background:radial-gradient(circle, rgba(255,0,120,.15), transparent 60%);
-      animation: smoke 30s linear infinite;
-      z-index:-1;
-    }
-    body::after{
-      animation-duration:45s;
-      opacity:.6;
-    }
+/* ===== SMOKE BACKGROUND ===== */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
 
-    @keyframes smoke{
-      0%{transform:translate(0,0) scale(1)}
-      50%{transform:translate(-10%,10%) scale(1.2)}
-      100%{transform:translate(0,0) scale(1)}
-    }
+/* ===== HEADER ===== */
+header{
+  display:flex;
+  justify-content:center;
+  padding:30px 10px;
+}
+.title-frame{
+  border:1px solid rgba(255,255,255,.3);
+  padding:14px 28px;
+  border-radius:14px;
+  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,.35);
+}
+.title-frame h1{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;
+  letter-spacing:2px;
+  font-style:italic;
+  color:#f5d9e6;
+}
 
-    header{
-      display:flex;
-      justify-content:center;
-      padding:32px 16px 18px;
-    }
+/* ===== GRID ===== */
+.grid{
+  max-width:1100px;
+  margin:0 auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:22px;
+}
 
-    .title-frame{
-      padding:18px 26px;
-      border-radius:28px;
-      background:rgba(0,0,0,.35);
-      backdrop-filter:blur(20px);
-      border:1px solid rgba(255,255,255,.15);
-      text-align:center;
-    }
+/* ===== CARD BASE ===== */
+.card{
+  position:relative;
+  padding:22px;
+  border-radius:20px;
+  backdrop-filter:blur(14px);
+  background:rgba(255,255,255,.08);
+  box-shadow:0 20px 40px rgba(0,0,0,.5);
+  transition:.35s ease;
+}
+.card:hover{
+  transform:translateY(-6px);
+}
 
-    .title-frame h1{
-      font-family:'Playfair Display',serif;
-      font-size:30px;
-      color:#ff9ad5;
-    }
+/* ===== ICON ===== */
+.icon{
+  width:42px;
+  height:42px;
+  margin-bottom:12px;
+  opacity:.9;
+}
 
-    .title-frame p{
-      font-size:13px;
-      opacity:.8;
-      margin-top:6px;
-      font-style:italic;
-    }
+/* ===== TEXT ===== */
+.card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  margin-bottom:6px;
+}
+.card p{
+  font-size:.85rem;
+  opacity:.8;
+}
 
-    .section{
-      padding:18px 18px 6px;
-    }
+/* ===== UNIQUE THEMES ===== */
+.diary{background:rgba(90,40,80,.25)}
+.album{background:rgba(120,80,90,.25)}
+.snaps{background:rgba(70,90,120,.25)}
+.spotify{background:rgba(30,90,60,.3)}
+.meters{background:rgba(120,40,40,.25)}
+.relationship{background:rgba(140,60,80,.3)}
+.events{background:rgba(80,80,130,.25)}
+.notes{background:rgba(90,90,90,.25)}
+.letters{background:rgba(120,70,90,.25)}
+.paranormal{background:rgba(20,20,40,.55)}
+.adult{background:rgba(40,10,20,.6)}
+.games{background:rgba(60,40,90,.25)}
+.locked{background:rgba(30,30,30,.4)}
 
-    .section h2{
-      font-size:18px;
-      font-weight:500;
-      margin-bottom:14px;
-      opacity:.9;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
+/* ===== EDITABLE AREA ===== */
+.edit{
+  margin-top:12px;
+  padding:10px;
+  border-radius:10px;
+  background:rgba(0,0,0,.25);
+  font-size:.85rem;
+  min-height:60px;
+}
+.edit[contenteditable="true"]:focus{
+  outline:1px solid rgba(255,255,255,.3);
+}
+</style>
+</head>
 
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
+<body>
 
-    .card{
-      min-height:120px;
-      padding:16px;
-      border-radius:var(--radius);
-      backdrop-filter:var(--blur);
-      border:1px solid rgba(255,255,255,.15);
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      transition:.3s ease;
-    }
+<canvas id="smoke"></canvas>
 
-    .card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 18px 40px rgba(0,0,0,.45);
-    }
-
-    .card h3{
-      font-family:'Playfair Display',serif;
-      font-size:18px;
-      margin-bottom:6px;
-    }
-
-    .card span{
-      font-size:13px;
-      opacity:.75;
-    }
-
-    /* Unique section vibes */
-    .letters{background:linear-gradient(135deg,rgba(255,120,170,.25),rgba(120,0,80,.25))}
-    .diary{background:linear-gradient(135deg,rgba(180,140,255,.25),rgba(50,0,90,.25))}
-
-    .snaps{background:linear-gradient(135deg,rgba(255,220,120,.25),rgba(120,80,0,.25))}
-    .songs{background:linear-gradient(135deg,rgba(120,255,180,.25),rgba(0,80,40,.25))}
-
-    .spotify{background:linear-gradient(135deg,rgba(30,215,96,.25),rgba(10,70,40,.25))}
-    .meters{background:linear-gradient(135deg,rgba(255,80,80,.25),rgba(90,0,0,.25))}
-
-    .paranormal{background:linear-gradient(135deg,rgba(180,180,180,.2),rgba(30,30,30,.35))}
-    .adult{background:linear-gradient(135deg,rgba(120,0,0,.35),rgba(20,0,0,.45))}
-
-    .games{background:linear-gradient(135deg,rgba(120,160,255,.25),rgba(20,40,90,.25))}
-    .locked{background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(0,0,0,.35))}
-
-    footer{height:40px}
-  </style></head>
-<body><header>
+<header>
   <div class="title-frame">
     <h1>𝘿𝙧𝙚𝙖𝙢𝙨 𝙊𝙛 𝙋𝙖𝙧𝙖𝙙𝙞𝙨𝙚~</h1>
-    <p>our private moody universe</p>
   </div>
-</header><section class="section">
-  <h2>Feelings</h2>
-  <div class="grid">
-    <div class="card letters"><h3>Delayed Love</h3><span>Letters (1h delivery)</span></div>
-    <div class="card diary"><h3>Secret Thoughts</h3><span>Private Diary</span></div>
+</header>
+
+<section class="grid">
+
+  <div class="card diary">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1827/1827504.png">
+    <h3>Private Diary</h3>
+    <p>Thoughts meant only for us.</p>
+    <div class="edit" contenteditable="true"></div>
   </div>
-</section><section class="section">
-  <h2>Memories</h2>
-  <div class="grid">
-    <div class="card snaps"><h3>Our Moments</h3><span>Snaps</span></div>
-    <div class="card songs"><h3>Melodies</h3><span>Songs</span></div>
+
+  <div class="card album">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/747/747376.png">
+    <h3>Private Album</h3>
+    <p>Hidden memories, frozen moments.</p>
+    <div class="edit">Image uploads later</div>
   </div>
-</section><section class="section">
-  <h2>Music & Mood</h2>
-  <div class="grid">
-    <div class="card spotify"><h3>Spotify Room</h3><span>Shared playlists</span></div>
-    <div class="card meters"><h3>Mood Meters</h3><span>Kalesh · Love · Energy</span></div>
+
+  <div class="card snaps">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/906/906794.png">
+    <h3>Snaps</h3>
+    <p>Temporary, playful, private.</p>
+    <div class="edit"></div>
   </div>
-</section><section class="section">
-  <h2>Secrets</h2>
-  <div class="grid">
-    <div class="card paranormal"><h3>Paranormal Files</h3><span>Investigator logs</span></div>
-    <div class="card adult"><h3>Adult Room (18+)</h3><span>Locked & intimate</span></div>
+
+  <div class="card spotify">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2111/2111624.png">
+    <h3>Spotify Room</h3>
+    <p>Songs that feel like us.</p>
+    <div class="edit">Paste Spotify links</div>
   </div>
-</section><section class="section">
-  <h2>Fun</h2>
-  <div class="grid">
-    <div class="card games"><h3>Mini Games</h3><span>Play together</span></div>
-    <div class="card locked"><h3>Locked Surprises</h3><span>Unlock later</span></div>
+
+  <div class="card meters">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png">
+    <h3>Meters</h3>
+    <p>Mood • Kalesh • Love</p>
+    <div class="edit"></div>
   </div>
-</section><footer></footer></body>
-</html>
+
+  <div class="card relationship">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">
+    <h3>Relationship Tracker</h3>
+    <p>Us, evolving.</p>
+    <div class="edit"></div>
+  </div>
+
+  <div class="card events">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/747/747310.png">
+    <h3>Event Tracker</h3>
+    <p>Dates, plans, memories.</p>
+    <div class="edit"></div>
+  </div>
+
+  <div class="card notes">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1827/1827379.png">
+    <h3>Random Thoughts</h3>
+    <p>Unfiltered mind dumps.</p>
+    <div class="edit"></div>
+  </div>
+
+  <div class="card letters">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
+    <h3>Letters</h3>
+    <p>Delivered after time.</p>
+    <div class="edit"></div>
+  </div>
+
+  <div class="card paranormal">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/482/482133.png">
+    <h3>Paranormal Investigator</h3>
+    <p>Logs, shadows, theories.</p>
+    <div class="edit"></div>
+  </div>
+
+  <div class="card adult">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1033/1033574.png">
+    <h3>Adult Room (18+)</h3>
+    <p>Dark. Private. Intimate.</p>
+    <div class="edit"></div>
+  </div>
+
+  <div class="card games">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png">
+    <h3>Mini Games</h3>
+    <p>Play against each other.</p>
+    <div class="edit">TTT • Dice • RPS • Memory</div>
+  </div>
+
+  <div class="card locked">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
+    <h3>Locked Zone</h3>
+    <p>Opens when time feels right.</p>
+    <div class="edit"></div>
+  </div>
+
+</section>
+
+<script>
+/* ===== SMOKE ANIMATION ===== */
+const c=document.getElementById('smoke'),x=c.getContext('2d');
+function r(){c.width=innerWidth;c.height=innerHeight}r();onresize=r;
+let p=[...Array(80)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*80+40,a:Math.random()*0.15+0.05}));
+(function a(){
+x.clearRect(0,0,c.width,c.height);
+p.forEach(s=>{
+x.beginPath();
+x.fillStyle=`rgba(200,200,200,${s.a})`;
+x.arc(s.x,s.y,s.r,0,Math.PI*2);
+x.fill();
+s.y-=0.2;if(s.y<-100)s.y=c.height+100;
+});
+requestAnimationFrame(a);
+})();
+</script>
+
+</body>
+      </html>
