@@ -1,219 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Paranormal Investigator Department</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paranormal Investigator</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-
 <style>
-*{box-sizing:border-box;}
-body {
-  margin: 0;
-  font-family:'Montserrat', sans-serif;
-  min-height: 100vh;
-  background: radial-gradient(circle at top, #1a0d12, #050406);
-  color: #e6e6e6;
-  overflow-x: hidden;
-  position: relative;
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Montserrat',sans-serif;
+  background:#0d0a0f;
+  color:#eee;
+  overflow-x:hidden;
 }
-/* Smokey background */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: url('https://images.unsplash.com/photo-1508612761958-e93145c01d7c') center/cover no-repeat;
-  opacity: 0.08;
-  filter: blur(2px);
-  z-index: -2;
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url('https://images.unsplash.com/photo-1508612761958-e93145c01d7c') center/cover no-repeat;
+  opacity:0.05;
+  filter:blur(3px);
+  z-index:-2;
 }
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,.8), rgba(0,0,0,.95));
-  z-index: -1;
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.85),rgba(0,0,0,.95));
+  z-index:-1;
 }
-
-/* Torch flashlight effect */
-.torch {
-  position: fixed;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
-  pointer-events: none;
-  mix-blend-mode: screen;
-  filter: blur(8px);
+.torch{
+  position:fixed;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle, rgba(255,255,255,0.1), transparent 60%);
+  pointer-events:none;
+  mix-blend-mode:screen;
+  filter:blur(8px);
+  z-index:5;
 }
-
-/* Dashboard layout */
-.dashboard {
-  max-width: 1000px;
-  margin: 30px auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 18px;
-  padding: 0 18px;
+header{
+  padding:20px;
+  text-align:center;
 }
-.panel {
-  background: rgba(30, 18, 22, 0.75);
-  border-radius: 18px;
-  padding: 18px;
-  backdrop-filter: blur(10px);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
-  position: relative;
+header h1{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;
+  font-style:italic;
+  color:#ff8fb3;
 }
-.panel h2 {
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-bottom: 10px;
-  opacity: .85;
+header p{
+  font-size:0.9rem;
+  opacity:0.7;
 }
-textarea, input {
-  width: 100%;
-  background: rgba(0,0,0,.4);
-  border: none;
-  border-radius: 10px;
-  padding: 10px;
-  color: #fff;
-  font-family: inherit;
-  resize: none;
+.dashboard{
+  position:relative;
+  width:90%;
+  max-width:1000px;
+  margin:20px auto;
+  height:700px;
+  background:rgba(30,20,28,0.7);
+  border-radius:16px;
+  backdrop-filter:blur(8px);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);
 }
-button {
-  margin-top: 8px;
-  background: #2b151c;
-  border: none;
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  opacity: .85;
+.case-card, .sticky-note, .image-card{
+  position:absolute;
+  background:rgba(50,0,40,0.85);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  padding:8px;
+  text-align:center;
+  cursor:move;
+  user-select:none;
+  color:#fff;
 }
-button:hover { opacity: 1; }
-.notes img {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 10px;
+.case-card h4, .sticky-note h4{
+  font-family:'Playfair Display',serif;
+  margin-bottom:6px;
+  font-size:14px;
 }
-.logs {
-  font-size: .85rem;
-  max-height: 160px;
-  overflow-y: auto;
-  opacity: .8;
+.case-card p, .sticky-note p{
+  font-size:12px;
+  opacity:0.8;
 }
-.meter-container {
-  background: rgba(0,0,0,.3);
-  height: 12px;
-  border-radius: 10px;
-  margin-top: 6px;
-  overflow: hidden;
+.image-card img{
+  width:100px;
+  height:100px;
+  object-fit:cover;
+  border-radius:8px;
 }
-.meter {
-  height: 12px;
-  width: 0%;
-  background: linear-gradient(90deg,#400000,#aa0000);
-  border-radius: 10px;
-  transition: width 0.2s ease;
+svg{
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none;
 }
-.disturb-alert {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #aa0000;
-  color: #fff;
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 6px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+.desk{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:140px;
+  background:rgba(20,10,15,0.85);
+  border-top:1px solid rgba(255,255,255,0.05);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  padding:10px 20px;
 }
-footer {
-  text-align: center;
-  font-size: .75rem;
-  opacity: .5;
-  padding: 20px 0 30px;
-  grid-column: 1 / -1;
+.desk div{
+  background:rgba(40,20,30,0.9);
+  padding:10px;
+  border-radius:8px;
+  min-width:60px;
+  text-align:center;
+  font-size:12px;
 }
+.log-panel{
+  position:absolute;
+  right:10px;
+  top:10px;
+  width:220px;
+  height:180px;
+  background:rgba(0,0,0,0.5);
+  border-radius:12px;
+  padding:8px;
+  font-size:12px;
+  overflow-y:auto;
+  contenteditable:true;
+}
+.log-panel h4{
+  margin-bottom:6px;
+  font-size:14px;
+  font-family:'Playfair Display',serif;
+}
+.meter{
+  position:absolute;
+  left:10px;
+  top:10px;
+  width:150px;
+  height:12px;
+  background:rgba(100,0,0,0.2);
+  border-radius:6px;
+  overflow:hidden;
+}
+.meter-fill{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#ff0000,#ff5555);
+  border-radius:6px;
+  transition:width 0.5s ease;
+}
+.add-buttons{
+  position:absolute;
+  bottom:160px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+}
+.add-buttons button{
+  padding:6px 10px;
+  border:none;
+  border-radius:8px;
+  background:#2b151c;
+  color:#fff;
+  cursor:pointer;
+  opacity:.85;
+}
+.add-buttons button:hover{opacity:1;}
 </style>
 </head>
-
 <body>
 <div class="torch" id="torch"></div>
 
-<div class="dashboard">
-  <div class="panel">
-    <h2>Case Notes</h2>
-    <textarea rows="6" placeholder="Observations, sightings, strange events..."></textarea>
-    <button>Save Note</button>
+<header>
+  <h1>Paranormal Investigation Dept.</h1>
+  <p>Confidential • Internal Use Only</p>
+</header>
+
+<div class="dashboard" id="dashboard">
+  <svg id="lines"></svg>
+
+  <!-- Main Case Cards -->
+  <div class="case-card" id="card-zoey" style="top:300px; left:420px;" contenteditable="true">
+    <h4>Zoey</h4>
+    <p>Missing, 23rd Dec</p>
+  </div>
+  <div class="case-card" id="card-damon" style="top:80px; left:100px;" contenteditable="true">
+    <h4>Damon</h4>
+    <p>Visited Kevin</p>
+  </div>
+  <div class="case-card" id="card-valeria" style="top:50px; left:420px;" contenteditable="true">
+    <h4>Valeria</h4>
+    <p>The Host</p>
+  </div>
+  <div class="case-card" id="card-kevin" style="top:500px; left:220px;" contenteditable="true">
+    <h4>Kevin</h4>
+    <p>Left Together 10PM</p>
+  </div>
+  <div class="case-card" id="card-brad" style="top:500px; left:600px;" contenteditable="true">
+    <h4>Brad</h4>
+    <p>Boyfriend</p>
   </div>
 
-  <div class="panel notes">
-    <h2>Evidence Board</h2>
-    <input type="file" accept="image/*" multiple/>
-    <p style="font-size:.8rem;opacity:.6">Attach images, screenshots, EMF photos</p>
+  <!-- Activity Log -->
+  <div class="log-panel" contenteditable="true" id="activity-log">
+    <h4>Activity Log</h4>
+    • 02:14 AM – unexplained sound detected<br>
+    • 03:02 AM – temperature drop<br>
+    • 03:47 AM – movement near doorway
   </div>
 
-  <div class="panel">
-    <h2>Activity Log</h2>
-    <div class="logs" id="activityLog">
-      • 02:14 AM – unexplained sound detected<br>
-      • 03:02 AM – temperature drop<br>
-      • 03:47 AM – movement near doorway
-    </div>
+  <!-- Signal Meter -->
+  <div class="meter">
+    <div class="meter-fill" id="meter"></div>
   </div>
 
-  <div class="panel">
-    <h2>Signal Monitor</h2>
-    <p style="font-size:.8rem;opacity:.7">Ambient disturbance</p>
-    <div class="meter-container">
-      <div class="meter" id="meter"></div>
-    </div>
-    <div class="disturb-alert" id="alert">DISTURBANCE!</div>
+  <!-- Desk -->
+  <div class="desk">
+    <div>Phone</div>
+    <div>Clipboard</div>
+    <div>Coffee Mug</div>
+    <div>Magazine</div>
+  </div>
+
+  <!-- Add Sticky Buttons -->
+  <div class="add-buttons">
+    <button id="add-note">+ Note</button>
+    <button id="add-image">+ Image</button>
   </div>
 </div>
 
-<footer>
-  Private Department • Dreams Of Paradise
-</footer>
-
 <script>
-const torch = document.getElementById('torch');
-document.addEventListener('mousemove', e => {
-  torch.style.left = e.clientX - 250 + 'px';
-  torch.style.top = e.clientY - 250 + 'px';
+const torch=document.getElementById('torch');
+document.addEventListener('mousemove',e=>{
+  torch.style.left=e.clientX-250+'px';
+  torch.style.top=e.clientY-250+'px';
 });
 
-// REALISTIC PARANORMAL METER
-const meter = document.getElementById('meter');
-const alertBox = document.getElementById('alert');
-const activityLog = document.getElementById('activityLog');
-
-let currentLevel = 0;
-let targetLevel = 0;
-
-function addLog(text){
-  const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-  activityLog.innerHTML = `• ${time} – ${text}<br>` + activityLog.innerHTML;
+// Draggable function
+function makeDraggable(el){
+  let isDragging=false, offsetX=0, offsetY=0;
+  el.addEventListener('mousedown', e=>{
+    isDragging=true;
+    offsetX=e.offsetX;
+    offsetY=e.offsetY;
+  });
+  document.addEventListener('mouseup', e=>{isDragging=false; saveState();});
+  document.addEventListener('mousemove', e=>{
+    if(!isDragging) return;
+    el.style.left=e.clientX-offsetX+'px';
+    el.style.top=e.clientY-offsetY+'px';
+    drawLines();
+  });
 }
 
-function updateMeter(){
-  if(Math.random() < 0.02){
-    targetLevel = 50 + Math.random() * 50; // spike
-    addLog('Unexplained disturbance detected');
-    alertBox.style.opacity = 1;
-    setTimeout(()=>{ alertBox.style.opacity = 0; }, 1200);
-  } else {
-    targetLevel = Math.random() * 30; // background hum
+// Enable drag for all initial cards
+document.querySelectorAll('.case-card').forEach(makeDraggable);
+
+// Draw connection lines
+const dashboard=document.getElementById('dashboard');
+const lines=document.getElementById('lines');
+function drawLines(){
+  const getCenter=el=>{
+    const r=el.getBoundingClientRect();
+    const dash=dashboard.getBoundingClientRect();
+    return {x:r.left-dash.left+r.width/2, y:r.top-dash.top+r.height/2};
   }
+  const zo=getCenter(document.getElementById('card-zoey'));
+  const dam=getCenter(document.getElementById('card-damon'));
+  const val=getCenter(document.getElementById('card-valeria'));
+  const ke=getCenter(document.getElementById('card-kevin'));
+  const br=getCenter(document.getElementById('card-brad'));
 
-  currentLevel += (targetLevel - currentLevel) * 0.05;
-  meter.style.width = currentLevel + '%';
+  lines.innerHTML=`<line x1="${zo.x}" y1="${zo.y}" x2="${dam.x}" y2="${dam.y}" stroke="#ff4d6d" stroke-width="2"/>
+                   <line x1="${zo.x}" y1="${zo.y}" x2="${val.x}" y2="${val.y}" stroke="#ff4d6d" stroke-width="2"/>
+                   <line x1="${zo.x}" y1="${zo.y}" x2="${ke.x}" y2="${ke.y}" stroke="#ff4d6d" stroke-width="2"/>
+                   <line x1="${zo.x}" y1="${zo.y}" x2="${br.x}" y2="${br.y}" stroke="#ff4d6d" stroke-width="2"/>`;
+}
+drawLines();
+
+// Signal Meter Animation
+const meter=document.getElementById('meter');
+setInterval(()=>{meter.style.width=Math.floor(Math.random()*100)+'%';},1000);
+
+// Add new sticky notes
+document.getElementById('add-note').addEventListener('click',()=>{
+  const note=document.createElement('div');
+  note.className='sticky-note';
+  note.style.top='50px';
+  note.style.left='50px';
+  note.contentEditable=true;
+  note.innerHTML='<h4>New Note</h4><p>Edit me...</p>';
+  dashboard.appendChild(note);
+  makeDraggable(note);
+  saveState();
+});
+
+// Add new image cards
+document.getElementById('add-image').addEventListener('click',()=>{
+  const input=document.createElement('input');
+  input.type='file';
+  input.accept='image/*';
+  input.onchange=e=>{
+    const file=e.target.files[0];
+    if(!file) return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const imgCard=document.createElement('div');
+      imgCard.className='image-card';
+      imgCard.style.top='100px';
+      imgCard.style.left='100px';
+      imgCard.innerHTML=`<img src="${ev.target.result}">`;
+      dashboard.appendChild(imgCard);
+      makeDraggable(imgCard);
+      saveState();
+    }
+    reader.readAsDataURL(file);
+  };
+  input.click();
+});
+
+// ----------------------
+// Save & Load Board State
+// ----------------------
+function saveState(){
+  const items=[];
+  dashboard.querySelectorAll('.case-card, .sticky-note, .image-card').forEach(el=>{
+    let type=el.className;
+    let html=el.innerHTML;
+    items.push({
+      type, html, top:el.style.top, left:el.style.left
+    });
+  });
+  // Save activity log
+  const logContent=document.getElementById('activity-log').innerHTML;
+  localStorage.setItem('dashboardItems',JSON.stringify(items));
+  localStorage.setItem('activityLog',logContent);
 }
 
-setInterval(updateMeter, 200);
+function loadState(){
+  const items=JSON.parse(localStorage.getItem('dashboardItems')||'[]');
+  dashboard.querySelectorAll('.case-card, .sticky-note, .image-card').forEach(el=>el.remove());
+  items.forEach(item=>{
+    const el=document.createElement('div');
+    el.className=item.type;
+    el.innerHTML=item.html;
+    el.style.top=item.top;
+    el.style.left=item.left;
+    dashboard.appendChild(el);
+    makeDraggable(el);
+  });
+  const log=document.getElementById('activity-log');
+  log.innerHTML=localStorage.getItem('activityLog')||log.innerHTML;
+  drawLines();
+}
+window.addEventListener('load',loadState);
+window.addEventListener('beforeunload',saveState);
 
 </script>
 </body>
-</html>
+    </html>
