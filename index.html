@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CutiePie's Room</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ====== ROOT COLORS ====== */
+:root{
+  --bg-love:#ffe6f0;
+  --bg-haunted:#1b1b2f;
+  --bg-adult:#330011;
+  --card:#fff0f5;
+  --text:#222;
+  --muted:#555;
+  --accent1:#ff4fa3;
+  --accent2:#ff87c1;
+  --accent3:#ffb3d1;
+  --heart:#ff1a75;
+}
+/* ====== GLOBAL STYLES ====== */
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg-love);color:var(--text);overflow-x:hidden;min-height:100vh;position:relative;transition:background 1.5s;}
+h1,h2{font-family:'Playfair Display',serif;}
+h1{font-size:3rem;text-align:center;margin-top:20px;background:linear-gradient(120deg,var(--accent1),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+h2{font-size:1.8rem;margin-bottom:10px;cursor:pointer;}
+p,li{line-height:1.7;color:var(--muted);}
+section{max-width:900px;margin:30px auto;padding:25px;border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,0.2);background:var(--card);transition:all 0.5s;}
+.collapsible{display:none;margin-top:15px;}
+input,textarea,button{width:100%;margin-top:10px;padding:10px;border-radius:12px;border:1px solid #ccc;font-size:1rem;}
+button{cursor:pointer;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;font-weight:600;}
+.locked{filter:blur(8px);user-select:none;}
+.hidden{display:none;}
+#adultRoom{background:var(--bg-adult);color:#ffccd5;padding:20px;border-radius:20px;}
+.game-box{background:#fff0f5;border-radius:15px;padding:15px;margin-top:15px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
+#haunted{background:var(--bg-haunted);color:#eee;padding:20px;border-radius:20px;position:relative;overflow:hidden;}
+.fog{position:absolute;width:200%;height:200%;background:radial-gradient(circle,#ccc0 10%,transparent 40%);animation:fogMove 40s linear infinite;opacity:0.05;}
+@keyframes fogMove{0%{transform:translate(0,0);}50%{transform:translate(-20%,10%);}100%{transform:translate(0,0);}}
+footer{text-align:center;margin:50px 0;color:var(--muted);}
+.float{position:absolute;width:25px;height:25px;border-radius:50%;background:var(--accent1);opacity:0.6;animation:floatAnim linear infinite;}
+@keyframes floatAnim{0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-50px) translateX(30px);}100%{transform:translateY(0) translateX(0);}}
+</style>
+</head>
+<body>
+<h1>CutiePie's Room 💖</h1>
+<div id="floatContainer"></div>
+
+<!-- ====== LOVE SECTIONS ====== -->
+<section>
+  <h2 onclick="toggleSection('notesSec')">💌 Daily Notes</h2>
+  <div id="notesSec" class="collapsible" contenteditable="true">Write love notes...</div>
+</section>
+
+<section>
+  <h2 onclick="toggleSection('moodSec')">😊 Mood Tracker</h2>
+  <div id="moodSec" class="collapsible" contenteditable="true">How are you feeling today?</div>
+</section>
+
+<section>
+  <h2 onclick="toggleSection('lettersSec')">✉️ Letters (Timed Delivery)</h2>
+  <div id="lettersSec" class="collapsible" contenteditable="true">Write letters to deliver later...</div>
+</section>
+
+<section>
+  <h2 onclick="toggleSection('albumSec')">📸 Album / Memories</h2>
+  <div id="albumSec" class="collapsible" contenteditable="true">Add memories, pics, first chats...</div>
+</section>
+
+<section>
+  <h2 onclick="toggleSection('spotifySec')">🎵 Favorite Songs</h2>
+  <div id="spotifySec" class="collapsible">
+    <iframe src="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+  </div>
+</section>
+
+<section>
+  <h2 onclick="toggleSection('kaleshSec')">💢 Kalesh Meter</h2>
+  <div id="kaleshSec" class="collapsible" contenteditable="true">Track playful fights ❤️‍🔥</div>
+</section>
+
+<section>
+  <h2 onclick="toggleSection('countdownSec')">⏳ Countdowns</h2>
+  <div id="countdownSec" class="collapsible">Next special day: <span id="specialCountdown"></span></div>
+</section>
+
+<!-- ====== GAMES SECTION ====== -->
+<section>
+  <h2 onclick="toggleSection('gamesSec')">🎮 Mini-Games</h2>
+  <div id="gamesSec" class="collapsible">
+    <div class="game-box" contenteditable="true">Ludo 2-player</div>
+    <div class="game-box" contenteditable="true">Carrom 2-player</div>
+    <div class="game-box" contenteditable="true">Tic-Tac-Toe</div>
+    <div class="game-box" contenteditable="true">Matching Memory Game</div>
+    <div class="game-box" contenteditable="true">Dice Game</div>
+    <div class="game-box" contenteditable="true">Hangman (Love Edition)</div>
+    <div class="game-box" contenteditable="true">Rock-Paper-Scissors</div>
+    <div class="game-box" contenteditable="true">Love Quiz / Trivia</div>
+    <div class="game-box" contenteditable="true">Connect 4</div>
+    <div class="game-box" contenteditable="true">Balloon Popping</div>
+    <div class="game-box" contenteditable="true">Emoji Catcher</div>
+    <div class="game-box" contenteditable="true">Mini Maze</div>
+    <div class="game-box" contenteditable="true">Candy Drop</div>
+  </div>
+</section>
+
+<!-- ====== HAUNTED SECTION ====== -->
+<section>
+  <h2 onclick="toggleSection('hauntedSec')">👻 Haunted / Paranormal Lab</h2>
+  <div id="hauntedSec" class="collapsible" contenteditable="true">
+    Investigate paranormal cases, add notes, pics, theories...
+    <div class="fog"></div>
+  </div>
+</section>
+
+<!-- ====== ADULT 18+ ROOM ====== -->
+<section>
+  <h2 onclick="toggleSection('adultSec')">🔥 Private Adult Room</h2>
+  <div id="adultSec" class="collapsible locked">
+    <input type="password" id="adultPass" placeholder="Enter password">
+    <button onclick="unlockAdult()">Unlock 18+ Room</button>
+    <div id="adultRoom" class="hidden" contenteditable="true">
+      Private adult vibes… type freely 😏
+    </div>
+  </div>
+</section>
+
+<footer>CutiePie's Room — fully interactive love adventure 💖</footer>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+/* ===== COLLAPSIBLE SECTIONS ===== */
+function toggleSection(id){
+  const el = document.getElementById(id);
+  el.style.display = el.style.display==='none' || el.style.display===''?'block':'none';
+}
+
+/* ===== COUNTDOWN ===== */
+const specialDate = new Date("2026-01-19T00:00:00");
+const countdownEl = document.getElementById("specialCountdown");
+function updateCountdown(){
+  const now = new Date();
+  const diff = specialDate-now;
+  if(diff>0){
+    const days=Math.floor(diff/(1000*60*60*24));
+    const hrs=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const mins=Math.floor((diff%(1000*60*60))/(1000*60));
+    countdownEl.textContent=`${days}d ${hrs}h ${mins}m`;
+  }else{countdownEl.textContent="🎉 Today is the special day!"}
+}
+setInterval(updateCountdown,60000);
+updateCountdown();
+
+/* ===== ADULT ROOM ===== */
+function unlockAdult(){
+  const pass=document.getElementById("adultPass").value;
+  const room=document.getElementById("adultRoom");
+  if(pass==="sri11072008"){room.classList.remove("hidden");}
+  else{alert("Incorrect password 😉");}
+}
+
+/* ===== FLOATING ELEMENTS ===== */
+const floatContainer=document.getElementById("floatContainer");
+const colors=["#ff4fa3","#ff87c1","#ffb3d1","#ff1a75","#ffccd5"];
+function createFloating(num){
+  for(let i=0;i<num;i++){
+    const div=document.createElement("div");
+    div.classList.add("float");
+    div.style.background=colors[Math.floor(Math.random()*colors.length)];
+    div.style.top=Math.random()*100+"%";
+    div.style.left=Math.random()*100+"%";
+    div.style.width=10+Math.random()*20+"px";
+    div.style.height=10+Math.random()*20+"px";
+    div.style.animationDuration=(10+Math.random()*20)+"s";
+    floatContainer.appendChild(div);
+  }
+}
+createFloating(50);
+
+/* ===== FIREBASE CONFIG PLACEHOLDER ===== */
+/* Replace with your Firebase project config */
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT.firebaseio.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+/* ===== FIREBASE SYNC EXAMPLE ===== */
+/* Example: sync love notes live */
+const notesRef = db.ref('loveRoom/notes');
+const notesSec = document.getElementById("notesSec");
+
+// Load initial
+notesRef.on('value', snapshot=>{
+  if(snapshot.exists()){notesSec.innerHTML = snapshot.val();}
+});
+
+// Update Firebase when editing
+notesSec.addEventListener("input",()=>{
+  notesRef.set(notesSec.innerHTML);
+});
+
+// Repeat similar for other sections: mood, letters, kalesh, album, games, hauntedLab, adultRoom
+</script>
+</body>
+  </html>
